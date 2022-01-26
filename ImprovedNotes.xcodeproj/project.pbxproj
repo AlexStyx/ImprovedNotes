@@ -7,23 +7,103 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016E7E63CED4425BD427DD33 /* FoldersListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B7EDCC498448D07409D5F /* FoldersListInteractor.swift */; };
+		087865C2DC1B93A26A8F9CAD /* NoteInteractorInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94360D797752FB52FD4FF6CA /* NoteInteractorInOut.swift */; };
+		0C70986FA952B85D9F74BDE6 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765C0D0132A3226DF95EC284 /* NoteViewController.swift */; };
+		10C003F355BC503484299B8A /* FoldersListRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134FA7D9D195D3185AC520E0 /* FoldersListRouterInput.swift */; };
+		144DA96E8E87B78AE6028D43 /* NotesListRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FDE2D3EF6C20D1A6842B9A /* NotesListRouterInput.swift */; };
+		1FEB398B843EE4A7FDC5DD1A /* FoldersListModuleInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B86232D22C54A48D4E6B1D /* FoldersListModuleInOut.swift */; };
+		276713974D5F240D4DB099FE /* NotesListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0987D182B50CD68AEC00E5BD /* NotesListRouter.swift */; };
+		36D8854739074ACD788A402E /* NoteAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A00AD4CF8122145A05917 /* NoteAssembly.swift */; };
+		393E6BFF55E471F5DB715F7B /* FoldersListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A624EB57F1EB116ADA0AF33 /* FoldersListPresenter.swift */; };
+		3C41150A674D58BE1FB616B0 /* FoldersListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BACBA96FCF6FDC999D7BAF /* FoldersListAssembly.swift */; };
+		41DDBE54AAC8208DBFF4BC9C /* NotesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139694EFBD6CE67D95E5C8FE /* NotesListPresenter.swift */; };
+		5911D0152ACB770720545599 /* NoteViewInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFEB502B982E1115E8385A7 /* NoteViewInOut.swift */; };
 		5F6D767527945844007538EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6D767427945844007538EF /* AppDelegate.swift */; };
 		5F6D767727945844007538EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6D767627945844007538EF /* SceneDelegate.swift */; };
-		5F6D767927945844007538EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6D767827945844007538EF /* ViewController.swift */; };
-		5F6D767C27945844007538EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6D767A27945844007538EF /* Main.storyboard */; };
 		5F6D767E27945846007538EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6D767D27945846007538EF /* Assets.xcassets */; };
 		5F6D768127945846007538EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6D767F27945846007538EF /* LaunchScreen.storyboard */; };
+		5F933A51279C4C5D0076D5C9 /* FloatingExpandableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F933A50279C4C5D0076D5C9 /* FloatingExpandableButton.swift */; };
+		5F933A55279C4D600076D5C9 /* Constatns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F933A54279C4D600076D5C9 /* Constatns.swift */; };
+		5F933A58279C4F2D0076D5C9 /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F933A57279C4F2D0076D5C9 /* UIView+extensions.swift */; };
+		5FA0A23E27A1E06300A5ED2A /* FolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA0A23D27A1E06300A5ED2A /* FolderViewModel.swift */; };
+		5FC04C1B279DBC1A000E2A4E /* FodersListTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC04C1A279DBC1A000E2A4E /* FodersListTransition.swift */; };
+		5FC04C1D279DC4B3000E2A4E /* FoldersListTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC04C1C279DC4B3000E2A4E /* FoldersListTransitionDelegate.swift */; };
+		5FD8BBEA2797422700781187 /* BaseSwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8BBE92797422700781187 /* BaseSwiftRouter.swift */; };
+		5FD8BBEC27974FEE00781187 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8BBEB27974FED00781187 /* NoteCell.swift */; };
+		5FF97BB52797D5FD00522F11 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF97BB42797D5FD00522F11 /* Note.swift */; };
+		5FF97BB92797D64600522F11 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF97BB82797D64600522F11 /* NoteViewModel.swift */; };
+		5FFA1A832798AB1800FE0FC6 /* NavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFA1A822798AB1800FE0FC6 /* NavigationBar.xib */; };
+		5FFA1A852798ABDD00FE0FC6 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFA1A842798ABDD00FE0FC6 /* NavigationBar.swift */; };
+		5FFA1A872798B47E00FE0FC6 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FFA1A862798B47E00FE0FC6 /* Colors.xcassets */; };
+		7B75370FC634C9FB341EAE7F /* FoldersListInteractorInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF21A358D6CD58C12DB39CB /* FoldersListInteractorInOut.swift */; };
+		7D49E043C827EB6FBE0ECB88 /* NotesListViewInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAC53BF9820AA6FB0264216 /* NotesListViewInOut.swift */; };
+		80DD950F2000E62DD2448BFB /* NotesListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B5A530FCAEE30370ED2BAF /* NotesListInteractor.swift */; };
+		816EF55A9438AFC21B8FC5CE /* FoldersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2B7ED378C8B2796ECE17F2 /* FoldersListRouter.swift */; };
+		818CB5C1AB0356CBB2405418 /* FoldersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C81B9CB35BD2215201B6B4 /* FoldersListViewController.swift */; };
+		87989F1B05E2B1DE91504018 /* Pods_ImprovedNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BB85F1DDAD5252A481FADF4 /* Pods_ImprovedNotes.framework */; };
+		94D0F4947449AF70E990489A /* NoteModuleInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = C360CF5B2AA9D2A42848CF66 /* NoteModuleInOut.swift */; };
+		A230A7AC88444A365CDE472D /* FoldersListViewInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9050A091AEA15CE28F36A1B7 /* FoldersListViewInOut.swift */; };
+		B54D0F251627C24C36E22052 /* NoteRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77514B23B67D742835490773 /* NoteRouterInput.swift */; };
+		B6BFFDC7CFB5BA0413F08984 /* NotePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC17A9566A3E6D5FA365C0 /* NotePresenter.swift */; };
+		BFE0A19CB98364C493A15937 /* NotesListInteractorInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC68397B20A6A9CCC7137ACD /* NotesListInteractorInOut.swift */; };
+		CDFB5F2AF80D0DBF9F8993F7 /* NotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E6E9D9957DC40637F53080 /* NotesListViewController.swift */; };
+		E0ED25A0A72E2C610803A9E5 /* NoteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A77FC1C6017BF932B61DE10 /* NoteRouter.swift */; };
+		F51B6147A0748C2388E5BEFD /* NotesListModuleInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC66D397CFC7C109C1C37FE3 /* NotesListModuleInOut.swift */; };
+		F73301A954AA9186600EA737 /* NoteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC321BA61592BDB72C2BF7 /* NoteInteractor.swift */; };
+		FFAA4B812BBC2A5B50751182 /* NotesListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC59F748E1C66F9F7F35179 /* NotesListAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0987D182B50CD68AEC00E5BD /* NotesListRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListRouter.swift; sourceTree = "<group>"; };
+		0A624EB57F1EB116ADA0AF33 /* FoldersListPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListPresenter.swift; sourceTree = "<group>"; };
+		0A96734B428AF592B96B4FE7 /* Pods-ImprovedNotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImprovedNotes.release.xcconfig"; path = "Target Support Files/Pods-ImprovedNotes/Pods-ImprovedNotes.release.xcconfig"; sourceTree = "<group>"; };
+		0F77893D2791B2CA40130658 /* Pods-ImprovedNotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImprovedNotes.debug.xcconfig"; path = "Target Support Files/Pods-ImprovedNotes/Pods-ImprovedNotes.debug.xcconfig"; sourceTree = "<group>"; };
+		134FA7D9D195D3185AC520E0 /* FoldersListRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListRouterInput.swift; sourceTree = "<group>"; };
+		139694EFBD6CE67D95E5C8FE /* NotesListPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListPresenter.swift; sourceTree = "<group>"; };
+		3BB85F1DDAD5252A481FADF4 /* Pods_ImprovedNotes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImprovedNotes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45FDE2D3EF6C20D1A6842B9A /* NotesListRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListRouterInput.swift; sourceTree = "<group>"; };
+		4A77FC1C6017BF932B61DE10 /* NoteRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteRouter.swift; sourceTree = "<group>"; };
+		52B5A530FCAEE30370ED2BAF /* NotesListInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListInteractor.swift; sourceTree = "<group>"; };
 		5F6D767127945844007538EF /* ImprovedNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImprovedNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6D767427945844007538EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F6D767627945844007538EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5F6D767827945844007538EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5F6D767B27945844007538EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5F6D767D27945846007538EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F6D768027945846007538EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F6D768227945846007538EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F933A50279C4C5D0076D5C9 /* FloatingExpandableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingExpandableButton.swift; sourceTree = "<group>"; };
+		5F933A54279C4D600076D5C9 /* Constatns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constatns.swift; sourceTree = "<group>"; };
+		5F933A57279C4F2D0076D5C9 /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
+		5FA0A23D27A1E06300A5ED2A /* FolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewModel.swift; sourceTree = "<group>"; };
+		5FC04C1A279DBC1A000E2A4E /* FodersListTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FodersListTransition.swift; sourceTree = "<group>"; };
+		5FC04C1C279DC4B3000E2A4E /* FoldersListTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersListTransitionDelegate.swift; sourceTree = "<group>"; };
+		5FD8BBE92797422700781187 /* BaseSwiftRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSwiftRouter.swift; sourceTree = "<group>"; };
+		5FD8BBEB27974FED00781187 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		5FF97BB42797D5FD00522F11 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		5FF97BB82797D64600522F11 /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
+		5FFA1A822798AB1800FE0FC6 /* NavigationBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavigationBar.xib; sourceTree = "<group>"; };
+		5FFA1A842798ABDD00FE0FC6 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		5FFA1A862798B47E00FE0FC6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		765C0D0132A3226DF95EC284 /* NoteViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		77514B23B67D742835490773 /* NoteRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteRouterInput.swift; sourceTree = "<group>"; };
+		7DC59F748E1C66F9F7F35179 /* NotesListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListAssembly.swift; sourceTree = "<group>"; };
+		86C81B9CB35BD2215201B6B4 /* FoldersListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListViewController.swift; sourceTree = "<group>"; };
+		88EC17A9566A3E6D5FA365C0 /* NotePresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotePresenter.swift; sourceTree = "<group>"; };
+		8EAC53BF9820AA6FB0264216 /* NotesListViewInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListViewInOut.swift; sourceTree = "<group>"; };
+		9050A091AEA15CE28F36A1B7 /* FoldersListViewInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListViewInOut.swift; sourceTree = "<group>"; };
+		94360D797752FB52FD4FF6CA /* NoteInteractorInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteInteractorInOut.swift; sourceTree = "<group>"; };
+		962B7EDCC498448D07409D5F /* FoldersListInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListInteractor.swift; sourceTree = "<group>"; };
+		9CF21A358D6CD58C12DB39CB /* FoldersListInteractorInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListInteractorInOut.swift; sourceTree = "<group>"; };
+		B2B86232D22C54A48D4E6B1D /* FoldersListModuleInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListModuleInOut.swift; sourceTree = "<group>"; };
+		B4BACBA96FCF6FDC999D7BAF /* FoldersListAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListAssembly.swift; sourceTree = "<group>"; };
+		BCFEB502B982E1115E8385A7 /* NoteViewInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteViewInOut.swift; sourceTree = "<group>"; };
+		C360CF5B2AA9D2A42848CF66 /* NoteModuleInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteModuleInOut.swift; sourceTree = "<group>"; };
+		CC66D397CFC7C109C1C37FE3 /* NotesListModuleInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListModuleInOut.swift; sourceTree = "<group>"; };
+		CEAC321BA61592BDB72C2BF7 /* NoteInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteInteractor.swift; sourceTree = "<group>"; };
+		DD2B7ED378C8B2796ECE17F2 /* FoldersListRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FoldersListRouter.swift; sourceTree = "<group>"; };
+		E5E6E9D9957DC40637F53080 /* NotesListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListViewController.swift; sourceTree = "<group>"; };
+		F45A00AD4CF8122145A05917 /* NoteAssembly.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteAssembly.swift; sourceTree = "<group>"; };
+		FC68397B20A6A9CCC7137ACD /* NotesListInteractorInOut.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListInteractorInOut.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +111,127 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87989F1B05E2B1DE91504018 /* Pods_ImprovedNotes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1184DCB35B9CC1A4E6066BFA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				5FF97BB62797D61000522F11 /* Models */,
+				FC68397B20A6A9CCC7137ACD /* NotesListInteractorInOut.swift */,
+				52B5A530FCAEE30370ED2BAF /* NotesListInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		11E14B3DDC9F9D572DAD9A57 /* FoldersList */ = {
+			isa = PBXGroup;
+			children = (
+				4502163C9EA40B8B7E0025FC /* Assembly */,
+				BF653A8AD2FF4969233B7B58 /* Interactor */,
+				E366BD7F281171D421043D54 /* Presenter */,
+				461F82B43776A9DB7C212B4A /* Router */,
+				2EC6D4C3B8D9B4A3CD64DC62 /* View */,
+			);
+			path = FoldersList;
+			sourceTree = "<group>";
+		};
+		1D2F7C7D1D60E800FC569126 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				F45A00AD4CF8122145A05917 /* NoteAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1DC198431C471BB50A4FB062 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				94360D797752FB52FD4FF6CA /* NoteInteractorInOut.swift */,
+				CEAC321BA61592BDB72C2BF7 /* NoteInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		20CBC377F0B3FDB2AD756711 /* NotesList */ = {
+			isa = PBXGroup;
+			children = (
+				E538E05B1A274009869D737C /* Assembly */,
+				1184DCB35B9CC1A4E6066BFA /* Interactor */,
+				663B047557C2B31496969ECC /* Presenter */,
+				AD7B15F186CC35D60E7ED971 /* Router */,
+				29D3B109D6AAE25C10BEBFF2 /* View */,
+			);
+			path = NotesList;
+			sourceTree = "<group>";
+		};
+		29D3B109D6AAE25C10BEBFF2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8EAC53BF9820AA6FB0264216 /* NotesListViewInOut.swift */,
+				E5E6E9D9957DC40637F53080 /* NotesListViewController.swift */,
+				5F933A50279C4C5D0076D5C9 /* FloatingExpandableButton.swift */,
+				5FFA1A812798AB0500FE0FC6 /* NavigationBar */,
+				5FD8BBED2797603B00781187 /* Cells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2EC6D4C3B8D9B4A3CD64DC62 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9050A091AEA15CE28F36A1B7 /* FoldersListViewInOut.swift */,
+				86C81B9CB35BD2215201B6B4 /* FoldersListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		357FA6AE61235571B9D20BE1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0F77893D2791B2CA40130658 /* Pods-ImprovedNotes.debug.xcconfig */,
+				0A96734B428AF592B96B4FE7 /* Pods-ImprovedNotes.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		39B01BDE80A584854D7C4DB9 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				7005A82A0DEC1355433D5C72 /* aleksandrbiserov */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		4502163C9EA40B8B7E0025FC /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				B4BACBA96FCF6FDC999D7BAF /* FoldersListAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		461F82B43776A9DB7C212B4A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				134FA7D9D195D3185AC520E0 /* FoldersListRouterInput.swift */,
+				DD2B7ED378C8B2796ECE17F2 /* FoldersListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		5F6D766827945844007538EF = {
 			isa = PBXGroup;
 			children = (
 				5F6D767327945844007538EF /* ImprovedNotes */,
 				5F6D767227945844007538EF /* Products */,
+				357FA6AE61235571B9D20BE1 /* Pods */,
+				767FCD037B403BCBD6CB7B34 /* Frameworks */,
+				39B01BDE80A584854D7C4DB9 /* Users */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,13 +246,241 @@
 		5F6D767327945844007538EF /* ImprovedNotes */ = {
 			isa = PBXGroup;
 			children = (
+				5FC04C19279DBC03000E2A4E /* CustomTransitioning */,
+				5FD8BBE7279741BD00781187 /* Modules */,
+				5F933A52279C4D410076D5C9 /* Application */,
+				5F933A53279C4D540076D5C9 /* Supporting Files */,
+				5F933A56279C4F190076D5C9 /* Extensions */,
+				5F6D768227945846007538EF /* Info.plist */,
+			);
+			path = ImprovedNotes;
+			sourceTree = "<group>";
+		};
+		5F933A52279C4D410076D5C9 /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				5F6D767427945844007538EF /* AppDelegate.swift */,
 				5F6D767627945844007538EF /* SceneDelegate.swift */,
-				5F6D767827945844007538EF /* ViewController.swift */,
-				5F6D767A27945844007538EF /* Main.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5F933A53279C4D540076D5C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				5F6D767D27945846007538EF /* Assets.xcassets */,
+				5FFA1A862798B47E00FE0FC6 /* Colors.xcassets */,
 				5F6D767F27945846007538EF /* LaunchScreen.storyboard */,
-				5F6D768227945846007538EF /* Info.plist */,
+				5F933A54279C4D600076D5C9 /* Constatns.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5F933A56279C4F190076D5C9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5F933A57279C4F2D0076D5C9 /* UIView+extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5FA0A23B27A1E03200A5ED2A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5FA0A23C27A1E05000A5ED2A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5FA0A23D27A1E06300A5ED2A /* FolderViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5FC04C19279DBC03000E2A4E /* CustomTransitioning */ = {
+			isa = PBXGroup;
+			children = (
+				5FC04C1A279DBC1A000E2A4E /* FodersListTransition.swift */,
+				5FC04C1C279DC4B3000E2A4E /* FoldersListTransitionDelegate.swift */,
+			);
+			path = CustomTransitioning;
+			sourceTree = "<group>";
+		};
+		5FD8BBE7279741BD00781187 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				5FD8BBE82797422700781187 /* BaseRouter */,
+				20CBC377F0B3FDB2AD756711 /* NotesList */,
+				798C10768E292DA017C59AA2 /* Note */,
+				11E14B3DDC9F9D572DAD9A57 /* FoldersList */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		5FD8BBE82797422700781187 /* BaseRouter */ = {
+			isa = PBXGroup;
+			children = (
+				5FD8BBE92797422700781187 /* BaseSwiftRouter.swift */,
+			);
+			path = BaseRouter;
+			sourceTree = "<group>";
+		};
+		5FD8BBED2797603B00781187 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5FD8BBEB27974FED00781187 /* NoteCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		5FF97BB62797D61000522F11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5FF97BB42797D5FD00522F11 /* Note.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5FF97BB72797D63800522F11 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5FF97BB82797D64600522F11 /* NoteViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		5FFA1A812798AB0500FE0FC6 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				5FFA1A822798AB1800FE0FC6 /* NavigationBar.xib */,
+				5FFA1A842798ABDD00FE0FC6 /* NavigationBar.swift */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		663B047557C2B31496969ECC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5FF97BB72797D63800522F11 /* ViewModels */,
+				CC66D397CFC7C109C1C37FE3 /* NotesListModuleInOut.swift */,
+				139694EFBD6CE67D95E5C8FE /* NotesListPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		675141706EFC12835C7C9AFB /* Development */ = {
+			isa = PBXGroup;
+			children = (
+				CC3950E67F15E6CA5C2EA6EE /* ImprovedNotes */,
+			);
+			path = Development;
+			sourceTree = "<group>";
+		};
+		7005A82A0DEC1355433D5C72 /* aleksandrbiserov */ = {
+			isa = PBXGroup;
+			children = (
+				675141706EFC12835C7C9AFB /* Development */,
+			);
+			path = aleksandrbiserov;
+			sourceTree = "<group>";
+		};
+		767FCD037B403BCBD6CB7B34 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BB85F1DDAD5252A481FADF4 /* Pods_ImprovedNotes.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		798C10768E292DA017C59AA2 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				1D2F7C7D1D60E800FC569126 /* Assembly */,
+				1DC198431C471BB50A4FB062 /* Interactor */,
+				DA301D95877D7B1DDC3FA43D /* Presenter */,
+				E0E911E4258BD64BAEC65B60 /* Router */,
+				A1518D6ADF8624B7489AFAD3 /* View */,
+			);
+			path = Note;
+			sourceTree = "<group>";
+		};
+		A1518D6ADF8624B7489AFAD3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BCFEB502B982E1115E8385A7 /* NoteViewInOut.swift */,
+				765C0D0132A3226DF95EC284 /* NoteViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AD7B15F186CC35D60E7ED971 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				45FDE2D3EF6C20D1A6842B9A /* NotesListRouterInput.swift */,
+				0987D182B50CD68AEC00E5BD /* NotesListRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		BF653A8AD2FF4969233B7B58 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				5FA0A23B27A1E03200A5ED2A /* Models */,
+				9CF21A358D6CD58C12DB39CB /* FoldersListInteractorInOut.swift */,
+				962B7EDCC498448D07409D5F /* FoldersListInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		CC3950E67F15E6CA5C2EA6EE /* ImprovedNotes */ = {
+			isa = PBXGroup;
+			children = (
+				E9B4079B0B76424E690E2421 /* ImprovedNotes */,
+			);
+			path = ImprovedNotes;
+			sourceTree = "<group>";
+		};
+		DA301D95877D7B1DDC3FA43D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C360CF5B2AA9D2A42848CF66 /* NoteModuleInOut.swift */,
+				88EC17A9566A3E6D5FA365C0 /* NotePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		E0E911E4258BD64BAEC65B60 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				77514B23B67D742835490773 /* NoteRouterInput.swift */,
+				4A77FC1C6017BF932B61DE10 /* NoteRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		E366BD7F281171D421043D54 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				5FA0A23C27A1E05000A5ED2A /* ViewModels */,
+				B2B86232D22C54A48D4E6B1D /* FoldersListModuleInOut.swift */,
+				0A624EB57F1EB116ADA0AF33 /* FoldersListPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		E538E05B1A274009869D737C /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				7DC59F748E1C66F9F7F35179 /* NotesListAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		E9B4079B0B76424E690E2421 /* ImprovedNotes */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = ImprovedNotes;
 			sourceTree = "<group>";
@@ -74,9 +492,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F6D768527945846007538EF /* Build configuration list for PBXNativeTarget "ImprovedNotes" */;
 			buildPhases = (
+				9ED39CBB82B231EB2B12ADAA /* [CP] Check Pods Manifest.lock */,
 				5F6D766D27945844007538EF /* Sources */,
 				5F6D766E27945844007538EF /* Frameworks */,
 				5F6D766F27945844007538EF /* Resources */,
+				6777825BBF3E7B35834C4727 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,36 +545,108 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FFA1A832798AB1800FE0FC6 /* NavigationBar.xib in Resources */,
+				5FFA1A872798B47E00FE0FC6 /* Colors.xcassets in Resources */,
 				5F6D768127945846007538EF /* LaunchScreen.storyboard in Resources */,
 				5F6D767E27945846007538EF /* Assets.xcassets in Resources */,
-				5F6D767C27945844007538EF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6777825BBF3E7B35834C4727 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ImprovedNotes/Pods-ImprovedNotes-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ImprovedNotes/Pods-ImprovedNotes-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ImprovedNotes/Pods-ImprovedNotes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9ED39CBB82B231EB2B12ADAA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ImprovedNotes-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5F6D766D27945844007538EF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F6D767927945844007538EF /* ViewController.swift in Sources */,
 				5F6D767527945844007538EF /* AppDelegate.swift in Sources */,
+				5FD8BBEC27974FEE00781187 /* NoteCell.swift in Sources */,
 				5F6D767727945844007538EF /* SceneDelegate.swift in Sources */,
+				5FFA1A852798ABDD00FE0FC6 /* NavigationBar.swift in Sources */,
+				FFAA4B812BBC2A5B50751182 /* NotesListAssembly.swift in Sources */,
+				BFE0A19CB98364C493A15937 /* NotesListInteractorInOut.swift in Sources */,
+				5F933A51279C4C5D0076D5C9 /* FloatingExpandableButton.swift in Sources */,
+				5FF97BB92797D64600522F11 /* NoteViewModel.swift in Sources */,
+				80DD950F2000E62DD2448BFB /* NotesListInteractor.swift in Sources */,
+				F51B6147A0748C2388E5BEFD /* NotesListModuleInOut.swift in Sources */,
+				41DDBE54AAC8208DBFF4BC9C /* NotesListPresenter.swift in Sources */,
+				144DA96E8E87B78AE6028D43 /* NotesListRouterInput.swift in Sources */,
+				5FF97BB52797D5FD00522F11 /* Note.swift in Sources */,
+				5FC04C1D279DC4B3000E2A4E /* FoldersListTransitionDelegate.swift in Sources */,
+				276713974D5F240D4DB099FE /* NotesListRouter.swift in Sources */,
+				5F933A58279C4F2D0076D5C9 /* UIView+extensions.swift in Sources */,
+				5FA0A23E27A1E06300A5ED2A /* FolderViewModel.swift in Sources */,
+				5FD8BBEA2797422700781187 /* BaseSwiftRouter.swift in Sources */,
+				7D49E043C827EB6FBE0ECB88 /* NotesListViewInOut.swift in Sources */,
+				5F933A55279C4D600076D5C9 /* Constatns.swift in Sources */,
+				CDFB5F2AF80D0DBF9F8993F7 /* NotesListViewController.swift in Sources */,
+				36D8854739074ACD788A402E /* NoteAssembly.swift in Sources */,
+				087865C2DC1B93A26A8F9CAD /* NoteInteractorInOut.swift in Sources */,
+				F73301A954AA9186600EA737 /* NoteInteractor.swift in Sources */,
+				94D0F4947449AF70E990489A /* NoteModuleInOut.swift in Sources */,
+				B6BFFDC7CFB5BA0413F08984 /* NotePresenter.swift in Sources */,
+				B54D0F251627C24C36E22052 /* NoteRouterInput.swift in Sources */,
+				E0ED25A0A72E2C610803A9E5 /* NoteRouter.swift in Sources */,
+				5911D0152ACB770720545599 /* NoteViewInOut.swift in Sources */,
+				0C70986FA952B85D9F74BDE6 /* NoteViewController.swift in Sources */,
+				3C41150A674D58BE1FB616B0 /* FoldersListAssembly.swift in Sources */,
+				7B75370FC634C9FB341EAE7F /* FoldersListInteractorInOut.swift in Sources */,
+				016E7E63CED4425BD427DD33 /* FoldersListInteractor.swift in Sources */,
+				5FC04C1B279DBC1A000E2A4E /* FodersListTransition.swift in Sources */,
+				1FEB398B843EE4A7FDC5DD1A /* FoldersListModuleInOut.swift in Sources */,
+				393E6BFF55E471F5DB715F7B /* FoldersListPresenter.swift in Sources */,
+				10C003F355BC503484299B8A /* FoldersListRouterInput.swift in Sources */,
+				816EF55A9438AFC21B8FC5CE /* FoldersListRouter.swift in Sources */,
+				A230A7AC88444A365CDE472D /* FoldersListViewInOut.swift in Sources */,
+				818CB5C1AB0356CBB2405418 /* FoldersListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5F6D767A27945844007538EF /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5F6D767B27945844007538EF /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		5F6D767F27945846007538EF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -284,6 +776,7 @@
 		};
 		5F6D768627945846007538EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F77893D2791B2CA40130658 /* Pods-ImprovedNotes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,9 +787,9 @@
 				INFOPLIST_FILE = ImprovedNotes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +805,7 @@
 		};
 		5F6D768727945846007538EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A96734B428AF592B96B4FE7 /* Pods-ImprovedNotes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -322,9 +816,9 @@
 				INFOPLIST_FILE = ImprovedNotes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
