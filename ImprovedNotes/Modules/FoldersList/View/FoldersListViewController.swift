@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 final class FoldersListViewController: UIViewController {
-        
+    
     var output: FoldersListViewOutput?
     var viewReadyBlock: (() -> Void)?
     
@@ -33,8 +33,6 @@ final class FoldersListViewController: UIViewController {
         }
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "folderCell")
         setupUI()
-        tableView.delegate = self
-        tableView.dataSource = self
         output?.didTriggerViewReadyEvent()
     }
     
@@ -42,25 +40,26 @@ final class FoldersListViewController: UIViewController {
     func setupViewReadyBlock(block: @escaping () -> Void) {
         viewReadyBlock = block;
     }
-
+    
     // MARK: - Private
     
     
     // MARK: - UI
     
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        return tableView
-    }()
-
+    private let tableView = UITableView()
+    
     
 }
 
 
+// MARK: - setupUI
 extension FoldersListViewController {
     private func setupUI() {
         view.addSubviews([tableView])
         layout()
+        setupNavigationControler()
+        setupSearchController()
+        setupTableView()
     }
     
     private func layout() {
@@ -70,6 +69,34 @@ extension FoldersListViewController {
             make.bottom.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    private func setupNavigationControler() {
+        title = "Folders"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = Constants.Colors.backgroudColor
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.systemGray6]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.systemGray6]
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = Constants.Colors.backgroudColor
+        tableView.separatorColor = .systemGray6
+    }
+    
+    private func setupSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Start typing..."
+        searchController.searchBar.searchTextField.textColor = .systemGray6
+        navigationItem.searchController = searchController
     }
 }
 
@@ -89,7 +116,17 @@ extension FoldersListViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: "folderCell", for: indexPath)
         var configuration = cell.defaultContentConfiguration()
         configuration.text = data[indexPath.row].name
+        configuration.textProperties.color = .systemGray6
         cell.contentConfiguration = configuration
+        cell.contentView.backgroundColor = Constants.Colors.backgroudColor
         return cell
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+extension FoldersListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchTerm = searchController.searchBar.text else { return }
+        print(searchTerm)
     }
 }

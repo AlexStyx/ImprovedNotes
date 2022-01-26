@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BB62D6CE-CEED-4FEA-AF4D-F4693A13573E"
+            uuid = "BD244713-41DF-452A-95B3-139604E3AE40"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ImprovedNotes/Modules/FoldersList/View/FoldersListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "setupSearchController()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
