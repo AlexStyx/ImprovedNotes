@@ -32,5 +32,4 @@ extension NotesListRouter: NotesListRouterInput {
             view?.present(menu, animated: true)
         }
     }
-    
 }

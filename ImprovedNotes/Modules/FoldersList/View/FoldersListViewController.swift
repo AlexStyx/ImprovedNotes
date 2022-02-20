@@ -76,8 +76,8 @@ extension FoldersListViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = Constants.Colors.backgroudColor
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.systemGray6]
-        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.systemGray6]
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
         navigationItem.compactAppearance = appearance
@@ -87,15 +87,16 @@ extension FoldersListViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = Constants.Colors.backgroudColor
-        tableView.separatorColor = .systemGray6
+        tableView.separatorColor = .clear
     }
     
     private func setupSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Start typing..."
-        searchController.searchBar.searchTextField.textColor = .systemGray6
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.barStyle = .black
+        searchController.searchBar.searchTextField.leftView?.tintColor = .white
         navigationItem.searchController = searchController
     }
 }
@@ -109,17 +110,28 @@ extension FoldersListViewController: FoldersListViewInput {
 
 extension FoldersListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        data.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "folderCell", for: indexPath)
         var configuration = cell.defaultContentConfiguration()
-        configuration.text = data[indexPath.row].name
-        configuration.textProperties.color = .systemGray6
+        if indexPath.row < data.count {
+            configuration.text = data[indexPath.row].name
+        } else {
+            configuration.text = "Add folder"
+            configuration.image = UIImage(systemName: "folder.badge.plus")
+            configuration.imageProperties.tintColor = .white
+        }
+        configuration.textProperties.color = .white
+
         cell.contentConfiguration = configuration
         cell.contentView.backgroundColor = Constants.Colors.backgroudColor
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
@@ -127,6 +139,8 @@ extension FoldersListViewController: UITableViewDelegate, UITableViewDataSource 
 extension FoldersListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchTerm = searchController.searchBar.text else { return }
+        data = data.filter {$0.name.contains(searchTerm)}
+        tableView.reloadData()
         print(searchTerm)
     }
 }

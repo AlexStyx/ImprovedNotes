@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - View Input
 protocol NotesListViewInput: AnyObject {
-    
+    func update(with viewModel: NotesListViewModel)
 }
 
 // MARK: - View Output
@@ -19,4 +19,6 @@ protocol NotesListViewOutput {
     func didTriggerViewWillAppearEvent()
     func didTapAddNoteButton()
     func didTapGoToFoldersButton()
+    func didSetEditing(to editing: Bool)
+    func didSelectNote(at index: Int)
 }

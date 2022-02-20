@@ -14,6 +14,7 @@ final class NoteAssembly: NSObject {
     private var presenter = NotePresenter()
     private var router = NoteRouter()
     private var interactor = NoteInteractor()
+    private let transitionDelegate = NoteTransitionDelegate()
 
     // MARK: - Public method
     @objc func assembleModule(moduleOutput: NoteModuleOutput?,
@@ -44,7 +45,9 @@ final class NoteAssembly: NSObject {
     private func configureDependenciesWithModuleOutput(moduleOutput: NoteModuleOutput?) {
         presenter.view = view
         view.output = presenter
-        view.modalPresentationStyle = .fullScreen
+//        view.modalPresentationStyle = .fullScreen
+        view.modalPresentationStyle = .custom
+//        view.transitioningDelegate = transitionDelegate
         
         presenter.router = router
         router.view = view

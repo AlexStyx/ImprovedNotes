@@ -17,6 +17,12 @@ final class NotePresenter: NSObject {
     
     // MARK: - Private
     
+    private func closeModule() {
+        DispatchQueue.main.async { [weak self] in
+            self?.router?.closeModule()
+        }
+    }
+    
 }
 
 
@@ -41,6 +47,10 @@ extension NotePresenter: NoteViewOutput {
     
     func didTriggerViewWillAppearEvent() {
         
+    }
+    
+    func didTapDismissButton() {
+        closeModule()
     }
     
 }

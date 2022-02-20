@@ -11,6 +11,23 @@ import SnapKit
 class NoteCell: UICollectionViewCell {
     static let cellId = "noteCell"
     
+    private var isEditing: Bool = false {
+        didSet {
+            selectImageView.isHidden = !isEditing
+        }
+    }
+    
+    override var isSelected: Bool {
+        get {
+            return false
+        }
+        set {
+            selectImageView.image = newValue ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "circle")
+        }
+        
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -18,56 +35,66 @@ class NoteCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setupUI()
     }
     
-    private let title: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
-        return label
-    }()
+    private lazy var title: UILabel = {
+        $0.font = UIFont.systemFont(ofSize: 25, weight: .heavy)
+        $0.numberOfLines = 0
+        $0.textColor = .black
+        return $0
+    }(UILabel())
     
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .systemGray
-        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        return label
-    }()
+    
+    private lazy var dateLabel: UILabel = {
+        $0.textColor = .systemGray
+        $0.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+        return $0
+    }(UILabel())
+    
+    
+    private lazy var selectImageView: UIImageView = {
+        let image = UIImage(systemName: "circle")
+        $0.image = image
+        $0.tintColor = .white
+        return $0
+    }(UIImageView())
+
+    
     
     public func setup(with viewModel: NoteViewModel) {
         title.text = viewModel.title
         dateLabel.text = viewModel.dateString
+        isEditing = viewModel.isEditing
+        isSelected = viewModel.isSelected
     }
     
     private func setupUI() {
-        addSubivews()
-        if frame.width < UIScreen.main.bounds.width / 2 {
-            dateLabel.snp.makeConstraints { make in
-                make.bottom.equalToSuperview().offset(-20)
-                make.leading.equalToSuperview().offset(20)
-            }
-            
-            title.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(20)
-                make.leading.equalToSuperview().offset(20)
-                make.trailing.equalToSuperview().offset(-5)
-            }
-        } else {
-            dateLabel.snp.makeConstraints { make in
-                make.bottom.equalToSuperview().offset(-20)
-                make.trailing.trailing.equalToSuperview().offset(-20)
-            }
-            
-            title.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(20)
-                make.leading.equalToSuperview().offset(20)
-            }
+        
+        addSubviews([
+            title,
+            dateLabel,
+            selectImageView
+        ])
+        
+        title.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview().offset(-10)
+        }
+        
+        dateLabel.snp.makeConstraints { make in
+            make.top.equalTo(title.snp.bottom).offset(10)
+            make.bottom.equalToSuperview().offset(-10)
+            make.leading.equalToSuperview().offset(10)
+        }
+        
+        selectImageView.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-10)
+            make.width.equalTo(35)
+            make.height.equalTo(35)
         }
     }
-    
-    private func addSubivews() {
-        addSubview(title)
-        addSubview(dateLabel)
-    }
-    
     
 }

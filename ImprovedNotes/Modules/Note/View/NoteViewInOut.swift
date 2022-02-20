@@ -17,4 +17,5 @@ protocol NoteViewInput: AnyObject {
 protocol NoteViewOutput {
     func didTriggerViewReadyEvent()
     func didTriggerViewWillAppearEvent()
+    func didTapDismissButton()
 }

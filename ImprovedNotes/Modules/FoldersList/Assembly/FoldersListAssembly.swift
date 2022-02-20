@@ -15,7 +15,6 @@ final class FoldersListAssembly: NSObject {
     private var presenter = FoldersListPresenter()
     private var router = FoldersListRouter()
     private var interactor = FoldersListInteractor()
-    private let transitionDelegate = FoldersListTransitionDelegate()
 
     // MARK: - Public method
     @objc func assembleModule(moduleOutput: FoldersListModuleOutput?,

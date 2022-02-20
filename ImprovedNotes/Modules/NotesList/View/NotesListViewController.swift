@@ -8,15 +8,57 @@
 
 import UIKit
 import SideMenu
+import SnapKit
 
 final class NotesListViewController: UIViewController {
     
     var output: NotesListViewOutput?
     var viewReadyBlock: (() -> Void)?
     
-    private var floatingViewExpandedConsstraint: NSLayoutConstraint?
-    private var floatingViewUnexpandedConsstraint: NSLayoutConstraint?
+    private var viewModel: NotesListViewModel!
     
+    private lazy var settingsMenuCurrentYPosition: CGFloat = 0.0
+    
+    // MARK: - UI
+    private lazy var leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "folder"), style: .plain, target: self, action: #selector(goToFoldersButtonTapped))
+    private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(didTapOptionsButton(_:)))
+        
+    private lazy var collectionView: UICollectionView = {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.register(NoteCell.self, forCellWithReuseIdentifier: NoteCell.cellId)
+        $0.backgroundColor = Constants.Colors.backgroudColor
+        if let layout = $0.collectionViewLayout as? NotesListLayout {
+            layout.delegate = self
+        }
+        return $0
+    }(UICollectionView(frame: .zero, collectionViewLayout: NotesListLayout()))
+        
+    private lazy var settingsView: SettingsView = {
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(settingsViewPanGesture(_:)))
+        $0.addGestureRecognizer(panGestureRecognizer)
+        $0.delegate = self
+        $0.layer.cornerRadius = 10
+        return $0
+    }(SettingsView())
+        
+    private lazy var floatingButton: UIButton = {
+        $0.configuration = .filled()
+        $0.configuration?.image = UIImage(systemName: "plus")
+        $0.configuration?.baseBackgroundColor = Constants.Colors.buttonBackgroundColor
+        $0.configuration?.baseForegroundColor = .white
+        $0.configuration?.cornerStyle = .capsule
+        $0.configuration?.imagePlacement = .all
+        $0.configuration?.titleAlignment = .center
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOffset = CGSize(width: 0, height: 2)
+        $0.layer.shadowOpacity = 1
+        $0.layer.shadowRadius = 5.0
+        $0.addTarget(self, action: #selector(createNoteButtonTapped), for: .touchUpInside)
+        
+        return $0
+    }(UIButton())
+
     
     private let colors = [
         UIColor(red: 240 / 255, green: 163/255, blue: 178/255, alpha: 1.0),
@@ -28,26 +70,6 @@ final class NotesListViewController: UIViewController {
         UIColor(red: 131 / 255, green: 193/255, blue: 235/255, alpha: 1.0)
     ]
     
-    private let data = [
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date())),
-        NoteViewModel(note: Note(title: "Note title", date: Date()))
-        
-    ]
-    
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -55,11 +77,6 @@ final class NotesListViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        guard floatingView?.superview != nil else {  return }
-        DispatchQueue.main.async {
-            self.floatingView?.removeFromSuperview()
-            self.floatingView = nil
-        }
         super.viewWillDisappear(animated)
     }
     
@@ -80,22 +97,35 @@ final class NotesListViewController: UIViewController {
         viewReadyBlock = block;
     }
     
-    // MARK: - Private
+    public func update(with viewModel: NotesListViewModel) {
+        self.viewModel = viewModel
+        floatingButton.isHidden = viewModel.isEditing
+        updateNavigationBar()
+        updateToolBar()
+        updateCollectionView()
+    }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        output?.didSetEditing(to: editing)
+    }
     
+    // MARK: - Private    
+    private func updateNavigationBar() {
+        navigationItem.rightBarButtonItem = viewModel.isEditing ? editButtonItem : rightBarButtonItem
+        navigationItem.leftBarButtonItem = viewModel.isEditing ? nil : leftBarButtonItem
+    }
     
-    // MARK: - UI
+    private func updateToolBar() {
+        navigationController?.setToolbarHidden(!viewModel.isEditing, animated: true)
+        toolbarItems?.first?.title = viewModel.moveToActionTitle
+        toolbarItems?.last?.title = viewModel.removeActionTitle
+    }
     
-    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: NotesListViewController.collectionViewLayout())
-    
-    private let navigationBar = NavigationBar()
-    
-    private var floatingView: FloatingExpandableButton?
-    private var goToFoldersButton: UIButton?
-    private var closeButton: UIButton?
-    
-    
-    
+    private func updateCollectionView() {
+        collectionView.allowsMultipleSelection = viewModel.isEditing
+        collectionView.reloadData()
+    }
 }
 
 
@@ -104,63 +134,146 @@ extension NotesListViewController: NotesListViewInput {
     
 }
 
+
 //MARK: - Setup UI
 extension NotesListViewController {
     
     private func setupUI() {
         view.backgroundColor = Constants.Colors.backgroudColor
-        addSubviews()
+        
+        view.addSubviews([
+            collectionView,
+            floatingButton,
+            settingsView,
+        ])
+        
         layout()
-        setupCollectionView()
-        setupCustomNavigationBar()
-        createFloatingButton()
-    }
-    
-    private func addSubviews() {
-        view.addSubview(collectionView)
-        view.addSubview(navigationBar)
+        
+        setupNavigationController()
+        setupSearchController()
     }
     
     private func layout() {
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(navigationBar.snp.bottom)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(15)
             make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-15)
             make.bottom.equalToSuperview()
         }
         
-        navigationBar.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
-            make.height.equalTo(140)
+        floatingButton.snp.makeConstraints{ make in
+            make.trailing.equalToSuperview().offset(-40)
+            make.bottom.equalToSuperview().offset(-60)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+
         }
         
+        let settingsViewDefaultFrame = CGRect(x: .zero, y: view.bounds.height, width: view.bounds.width, height: 400)
+        settingsView.frame = settingsViewDefaultFrame
     }
     
-    private func setupCustomNavigationBar() {
-        navigationBar.backgroundColor = Constants.Colors.backgroudColor
-        navigationBar.contentView.backgroundColor = Constants.Colors.backgroudColor
+    private func setupNavigationController() {
+        setupNavgationBar()
+        setupToolbar()
     }
     
-    private func setupCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(NoteCell.self, forCellWithReuseIdentifier: NoteCell.cellId)
-        collectionView.backgroundColor = Constants.Colors.backgroudColor
+    private func setupNavgationBar() {
+        title = "Notes"
+    
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = Constants.Colors.backgroudColor
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.leftBarButtonItem = leftBarButtonItem
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
+    
+    
+    private func setupToolbar() {
+        navigationController?.setToolbarHidden(true, animated: true)
+        let moveToFolderItem = UIBarButtonItem(title: "Move All", style: .plain, target: self, action: #selector(moveToButtonTapped))
+        let flexibleItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let removeItem = UIBarButtonItem(title:"Remove All", style: .plain, target: self, action: #selector(removeButtonTapped))
+        toolbarItems = [moveToFolderItem, flexibleItem, removeItem]
+        navigationController?.toolbar.barTintColor = Constants.Colors.backgroudColor
+        navigationController?.toolbar.tintColor = .white
+    }
+    
+    private func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        searchController.searchBar.barStyle = .black
+        searchController.searchBar.searchTextField.leftView?.tintColor = .white
+        navigationItem.searchController = searchController
+    }
 }
+
 
 // MARK: - Actions
 extension NotesListViewController {
-   
+    
+    @objc private func didTapOptionsButton(_ sender: UIBarButtonItem) {
+        if settingsView.frame.origin.y >= view.bounds.height {
+            openSettingsView()
+        }
+    }
+    
+    @objc private func goToFoldersButtonTapped() {
+        output?.didTapGoToFoldersButton()
+    }
+    
+    @objc private func createNoteButtonTapped() {
+        output?.didTapAddNoteButton()
+    }
+    
+    @objc private func moveToButtonTapped() {
+        print(#function)
+    }
+    
+    @objc private func removeButtonTapped() {
+        print(#function)
+    }
+    
+    @objc private func settingsViewPanGesture(_ sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .began:
+            settingsMenuCurrentYPosition = settingsView.frame.origin.y
+        case .changed:
+            let yCoordinate = sender.translation(in: self.view).y
+           
+            var newYPoint = settingsMenuCurrentYPosition + yCoordinate
+            if newYPoint >= view.bounds.height - settingsView.frame.height {
+                settingsView.frame.origin.y = newYPoint
+            } else {
+                newYPoint = view.bounds.height - settingsView.frame.height
+                settingsView.frame.origin.y = newYPoint
+            }
+        case .ended:
+            if settingsView.frame.origin.y > view.bounds.height - settingsView.frame.height * 0.5 || sender.velocity(in: view).y > 1500 {
+                closeSettingsView()
+            } else {
+                openSettingsView()
+            }
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension NotesListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return viewModel?.notes.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -168,166 +281,61 @@ extension NotesListViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.backgroundColor = colors[Int(arc4random_uniform(UInt32(colors.count)))]
         cell.layer.cornerRadius = 15
         cell.clipsToBounds = true
-        
-        let note = data[indexPath.row]
+        guard let note = viewModel?.notes[indexPath.row] else { fatalError("Cannot find viewModel") }
         cell.setup(with: note)
         return cell
     }
-}
-
-// MARK: - CollectionView Layout
-extension NotesListViewController {
-    static func collectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let basicItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.5),
-                heightDimension: .fractionalHeight(1)
-            )
-        )
-        
-        let basicItemInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
-        
-        basicItem.contentInsets = basicItemInsets
-        let horizontalBasicGroup = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(1/6)
-            ),
-            subitem: basicItem,
-            count: 2
-        )
-        
-        
-        let wideItem = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(1/6))
-        )
-        
-        wideItem.contentInsets = basicItemInsets
-        
-        
-        let verticalItem1 = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(3/5)
-            )
-        )
-        
-        verticalItem1.contentInsets = basicItemInsets
-        
-        let verticalItem2 = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(2/5)
-            )
-        )
-        
-        verticalItem2.contentInsets = basicItemInsets
-        
-        let verticalGroup1 = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.5),
-                heightDimension: .fractionalHeight(1)
-            ),
-            subitems: [
-                verticalItem1,
-                verticalItem2
-            ]
-        )
-        
-        let verticalGroup2 = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.5),
-                heightDimension: .fractionalHeight(1)
-            ),
-            subitems: [
-                verticalItem2,
-                verticalItem1
-            ]
-        )
-        
-        let horizontalGroupOfVerticalGroups = NSCollectionLayoutGroup.horizontal(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(4/6)
-            ),
-            subitems: [
-                verticalGroup1,
-                verticalGroup2
-            ]
-        )
-        
-        
-        let group = NSCollectionLayoutGroup.vertical(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(1.1)),
-            subitems: [
-                horizontalBasicGroup,
-                wideItem,
-                horizontalGroupOfVerticalGroups
-            ]
-        )
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        output?.didSelectNote(at: indexPath.row)
     }
 }
 
-// MARK: - Expandable floating buttons
-extension NotesListViewController
-{
-    private func createFloatingButton() {
-        floatingView = FloatingExpandableButton()
-        floatingView?.delegate = self
-        floatingView?.translatesAutoresizingMaskIntoConstraints = false
-        constrainFloatingButtonToWindow()
+
+// MARK: - NotesListLayoutDelegate
+extension NotesListViewController: NotesListLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, layout: NotesListLayout, heightForLabelsAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let width = (layout.collectionViewContentSize.width / 2) - 32
+        guard let viewModel = viewModel?.notes[indexPath.row] else { return 0 }
+        return viewModel.title.height(width: width, font: Constants.Fonts.noteTitleFont) + viewModel.dateString.height(width: width, font: Constants.Fonts.noteDateFont) + 40
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+extension NotesListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchTerm = searchController.searchBar.text else { return }
+        print(searchTerm)
+    }
+}
+
+
+// MARK: - SettingsView
+extension NotesListViewController: SettingsViewDelegate {
+    
+    func didTapCloseButton() {
+        closeSettingsView()
     }
     
+    func didTapSelectButton() {
+        setEditing(true, animated: true)
+        closeSettingsView()
+    }
     
-    private func constrainFloatingButtonToWindow() {
-        DispatchQueue.main.async {
-            guard let keyWindow = UIApplication.shared.keyWindow,
-                  let floatingButton = self.floatingView
-            else { return }
-            
-            keyWindow.addSubview(floatingButton)
-            
+    func didChangeSort() {
+        print(#function)
+    }
     
-            keyWindow.trailingAnchor.constraint(equalTo: floatingButton.trailingAnchor,
-                                                constant: 30).isActive = true
-            keyWindow.bottomAnchor.constraint(equalTo: floatingButton.bottomAnchor,
-                                                                       constant: 50).isActive = true
-            
-            floatingButton.widthAnchor.constraint(equalToConstant: 75).isActive = true
-            self.floatingViewUnexpandedConsstraint = floatingButton.heightAnchor.constraint(equalToConstant: 75)
-            self.floatingViewExpandedConsstraint = floatingButton.heightAnchor.constraint(equalToConstant: 75 * 3 + 5 * 2)
-            self.floatingViewUnexpandedConsstraint?.isActive = true
+    private func closeSettingsView() {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.settingsView.frame.origin.y = self?.view.bounds.height ?? 0
+        }
+    }
+    
+    private func openSettingsView() {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.settingsView.frame.origin.y = (self?.view.bounds.height ?? 0) - (self?.settingsView.frame.height ?? 0)
         }
     }
 }
-
-extension NotesListViewController: FloatingExpandableButtonDelegate {
-    
-    public func expandView() {
-        guard let keyWindow = UIApplication.shared.keyWindow else { return }
-        floatingViewUnexpandedConsstraint?.isActive = false
-        floatingViewExpandedConsstraint?.isActive = true
-        keyWindow.layoutIfNeeded()
-    }
-    
-    public func narrowView() {
-        guard let keyWindow = UIApplication.shared.keyWindow else { return }
-        floatingViewExpandedConsstraint?.isActive = false
-        floatingViewUnexpandedConsstraint?.isActive = true
-    }
-    
-    public func addNoteButtonTapped() {
-        output?.didTapAddNoteButton()
-    }
-    
-    public func goToFoldersButtonTapped() {
-        output?.didTapGoToFoldersButton()
-    }
-}
-
