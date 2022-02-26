@@ -17,13 +17,15 @@ final class NotesListRouter: BaseSwiftRouter {
 // MARK: - Router Input
 extension NotesListRouter: NotesListRouterInput {
     
-    func openNoteModule() {
+    func openNoteModule(with note: Any) {
         let noteAssembly = NoteAssembly()
         noteAssembly.assembleModule(moduleOutput: nil) { [weak self] router in
             if let view = self?.view {
                 router.openModuleFrom(viewController: view)
             }
-        } completion: { _ in }
+        } completion: { input in
+            input.setup(with: note)
+        }
 
     }
     

@@ -7,11 +7,8 @@
 
 import UIKit
 
-protocol FoldersListViewModelProtocol {
-    func numberOfRows() -> Int
-    func viewModelForCell(for indexPath: IndexPath)
+struct FoldersListViewModel {
+    var folders = [FolderViewModel]()
 }
-//
-//struct FoldersListViewModel: FoldersListViewModelProtocol {
-////    private var notes = [F]()
-//}
+
+

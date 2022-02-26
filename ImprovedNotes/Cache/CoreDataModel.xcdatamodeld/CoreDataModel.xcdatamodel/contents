@@ -7,6 +7,7 @@
         <relationship name="note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="content" inverseEntity="Note"/>
     </entity>
     <entity name="Folder" representedClassName="Folder" syncable="YES">
+        <attribute name="current" optional="YES" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="sort" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
@@ -24,7 +25,7 @@
     </entity>
     <elements>
         <element name="ContentItem" positionX="-45" positionY="63" width="128" height="89"/>
-        <element name="Folder" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Folder" positionX="-63" positionY="-18" width="128" height="104"/>
         <element name="Note" positionX="-54" positionY="-9" width="128" height="149"/>
     </elements>
 </model>

@@ -10,13 +10,19 @@ import CoreData
 
 final class CoreDataStack {
     
+    static let shared = CoreDataStack(modelName: "CoreDataModel")
+    
     public lazy var managedContext: NSManagedObjectContext = {
         storeContainer.viewContext
     }()
     private let modelName: String
     
-    init(modelName: String) {
+    private init(modelName: String) {
         self.modelName = modelName
+        let dirPaths =
+        NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                            .userDomainMask, true)
+        print("path: \(dirPaths[0])")
     }
     
     private lazy var storeContainer: NSPersistentContainer = {
@@ -32,8 +38,7 @@ final class CoreDataStack {
         return container
     }()
     
-    
-    private func saveContext() {
+    public func saveContext() {
         do {
             try managedContext.save()
         } catch let error as NSError {

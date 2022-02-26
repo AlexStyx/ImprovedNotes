@@ -10,10 +10,10 @@ import Foundation
 
 // MARK: - Interactor Input
 protocol NotesListInteractorInput {
-
+    func loadData(with sortValue: SortValue?) 
 }
 
 // MARK: - Interactor Output
 protocol NotesListInteractorOutput: AnyObject {
-
+    func didChangeList(notes: [Note])
 }

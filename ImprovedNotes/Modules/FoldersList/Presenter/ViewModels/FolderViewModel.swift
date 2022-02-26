@@ -8,6 +8,18 @@
 import Foundation
 
 struct FolderViewModel {
-    var name: String
+    let id: UUID
+    let name: String
+    
+    init(folder: Folder) {
+        self.name = folder.title ?? ""
+        self.id = folder.id ?? UUID()
+    }
+}
+
+extension FolderViewModel: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 

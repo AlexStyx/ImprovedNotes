@@ -2,7 +2,7 @@
 //  Folder+CoreDataProperties.swift
 //  ImprovedNotes
 //
-//  Created by Александр Бисеров on 2/12/22.
+//  Created by Александр Бисеров on 2/23/22.
 //
 //
 
@@ -19,6 +19,7 @@ extension Folder {
     @NSManaged public var id: UUID?
     @NSManaged public var sort: Int64
     @NSManaged public var title: String?
+    @NSManaged public var current: Bool
     @NSManaged public var notes: NSSet?
 
 }

@@ -17,7 +17,7 @@ final class NotesListPresenter: NSObject {
     
     // MARK: - Private
     
-    private var viewModel: NotesListViewModel = NotesListViewModel(notes: [], isEditing: false)
+    private var viewModel = NotesListViewModel(notes: [], isEditing: false)
     
 }
 
@@ -31,7 +31,13 @@ extension NotesListPresenter: NotesListModuleInput {
 
 // MARK: - Interactor Output
 extension NotesListPresenter: NotesListInteractorOutput {
-    
+    func didChangeList(notes: [Note]) {
+        for note in notes {
+            let noteViewModel = NoteViewModel(note: note)
+            viewModel.notes.append(noteViewModel)
+        }
+        view?.update(with: viewModel)
+    }
 }
 
 
@@ -39,31 +45,7 @@ extension NotesListPresenter: NotesListInteractorOutput {
 extension NotesListPresenter: NotesListViewOutput {
     
     func didTriggerViewReadyEvent() {
-        let vm = NoteViewModel(title: "Text note asdasdadad adasd asd asd asd asd asdas ", dateString: "22.22.2022", isSelected: false, isEditing: false)
-        let vm1 = NoteViewModel(title: "Text note", dateString: "22.22.2022", isSelected: false, isEditing: false)
-        let vm2 = NoteViewModel(title: "Text note Text note asdasdadad adasd asd asd asd asd asdas  Text note asdasdadad adasd asd asd asd asd asdas Text note asdasdadad adasd asd asd asd asd asdas ", dateString: "22.22.2022", isSelected: false, isEditing: false)
-
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm1)
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm2)
-        viewModel.notes.append(vm2)
-        viewModel.notes.append(vm1)
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm2)
-        viewModel.notes.append(vm1)
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm2)
-        viewModel.notes.append(vm2)
-        viewModel.notes.append(vm1)
-        viewModel.notes.append(vm)
-        viewModel.notes.append(vm2)
-        viewModel.notes.append(vm)
-        view?.update(with: viewModel)
+        interactor?.loadData(with: nil)
     }
     
     func didTriggerViewWillAppearEvent() {
@@ -71,7 +53,7 @@ extension NotesListPresenter: NotesListViewOutput {
     }
     
     func didTapAddNoteButton() {
-        router?.openNoteModule()
+        router?.openNoteModule(with: NoteViewModel(title: "Test title", dateString: Date().dateString(), isSelected: false, isEditing: false, id: UUID()))
     }
     
     func didTapGoToFoldersButton() {
@@ -101,7 +83,8 @@ extension NotesListPresenter: NotesListViewOutput {
             viewModel.moveToActionTitle = isNumberOfSelecteditemsGreaterThanZero ? "Move" : "Move All"
             viewModel.removeActionTitle = isNumberOfSelecteditemsGreaterThanZero ? "Remove": "Remove All"
         } else {
-            router?.openNoteModule()
+            let note = viewModel.notes[index]
+            router?.openNoteModule(with: note)
         }
         view?.update(with: viewModel)
     }

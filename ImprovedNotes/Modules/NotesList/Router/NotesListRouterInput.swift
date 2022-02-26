@@ -10,6 +10,6 @@ import Foundation
 
 @objc
 protocol NotesListRouterInput: BaseSwiftRouterInput {
-    func openNoteModule()
+    func openNoteModule(with note: Any)
     func openFoldersListModule()
 }

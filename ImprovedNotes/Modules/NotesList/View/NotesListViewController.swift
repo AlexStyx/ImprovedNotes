@@ -9,6 +9,7 @@
 import UIKit
 import SideMenu
 import SnapKit
+import CoreData
 
 final class NotesListViewController: UIViewController {
     
@@ -58,6 +59,16 @@ final class NotesListViewController: UIViewController {
         
         return $0
     }(UIButton())
+    
+    private lazy var blurView: UIVisualEffectView = {
+        $0.effect = UIBlurEffect(style: .dark)
+        $0.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        $0.alpha = 0.0
+        $0.isHidden = false
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapBlurView))
+        $0.addGestureRecognizer(tap)
+        return $0
+    }(UIVisualEffectView())
 
     
     private let colors = [
@@ -143,6 +154,7 @@ extension NotesListViewController {
         
         view.addSubviews([
             collectionView,
+            blurView,
             floatingButton,
             settingsView,
         ])
@@ -169,8 +181,9 @@ extension NotesListViewController {
 
         }
         
-        let settingsViewDefaultFrame = CGRect(x: .zero, y: view.bounds.height, width: view.bounds.width, height: 400)
+        let settingsViewDefaultFrame = CGRect(x: .zero, y: view.bounds.height, width: view.bounds.width, height: 200)
         settingsView.frame = settingsViewDefaultFrame
+        blurView.frame = view.bounds
     }
     
     private func setupNavigationController() {
@@ -242,6 +255,10 @@ extension NotesListViewController {
     
     @objc private func removeButtonTapped() {
         print(#function)
+    }
+    
+    @objc private func didTapBlurView() {
+        closeSettingsView()
     }
     
     @objc private func settingsViewPanGesture(_ sender: UIPanGestureRecognizer) {
@@ -330,12 +347,17 @@ extension NotesListViewController: SettingsViewDelegate {
     private func closeSettingsView() {
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.settingsView.frame.origin.y = self?.view.bounds.height ?? 0
+            self?.blurView.alpha = 0
+        } completion: { [weak self] finished in
+            self?.blurView.isHidden = finished
         }
     }
     
     private func openSettingsView() {
+        blurView.isHidden = false
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.settingsView.frame.origin.y = (self?.view.bounds.height ?? 0) - (self?.settingsView.frame.height ?? 0)
+            self?.blurView.alpha = 1
         }
     }
 }

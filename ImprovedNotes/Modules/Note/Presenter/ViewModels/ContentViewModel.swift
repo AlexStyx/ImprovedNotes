@@ -14,10 +14,14 @@ enum ContentType {
 struct ContentViewModel {
     var id: UUID
     var type: ContentType
-    var data: Data?
+    var data: Any?
 }
 
 extension ContentViewModel: Hashable {
+    static func == (lhs: ContentViewModel, rhs: ContentViewModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

@@ -26,4 +26,8 @@ enum Constants {
         static let noteTitleFont = UIFont.systemFont(ofSize: 25, weight: .heavy)
         static let noteDateFont = UIFont.systemFont(ofSize: 17, weight: .bold)
     }
+    
+    enum Tags {
+        static let noteTitleTextViewTag = 0
+    }
 }

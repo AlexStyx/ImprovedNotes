@@ -6,20 +6,24 @@
 //
 
 import UIKit
+import CloudKit
 
 struct NoteViewModel {
     let title: String
     let dateString: String
     var isSelected: Bool
     var isEditing: Bool
+    var id: UUID
     
     
-    init(title: String, dateString: String, isSelected: Bool, isEditing: Bool) {
+    init(title: String, dateString: String, isSelected: Bool, isEditing: Bool, id: UUID) {
         self.title = title
         self.dateString = dateString
         self.isSelected = isSelected
         self.isEditing = isEditing
+        self.id = id
     }
+    
     init(note: Note) {
         title = note.title ?? ""
         let dateFormatter = DateFormatter()
@@ -28,10 +32,13 @@ struct NoteViewModel {
         dateString = dateFormatter.string(from: note.dateCreated ?? Date())
         self.isEditing = false
         self.isSelected = false
+        self.id = note.id ?? UUID()
     }
     
-    mutating func setEditing(_ editing: Bool) {
-        isEditing = editing
+}
+
+extension NoteViewModel: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
-    
 }

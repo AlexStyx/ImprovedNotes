@@ -1,20 +1,24 @@
 PODS:
   - SideMenu (6.5.0)
   - SnapKit (5.0.1)
+  - SwiftReorder (7.2.0)
 
 DEPENDENCIES:
   - SideMenu
   - SnapKit (~> 5.0.0)
+  - SwiftReorder (~> 7.2)
 
 SPEC REPOS:
   trunk:
     - SideMenu
     - SnapKit
+    - SwiftReorder
 
 SPEC CHECKSUMS:
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftReorder: d687883abf5f2327268e006b038025a6fc515e34
 
-PODFILE CHECKSUM: 4ffd403828620bb03fadc4b357f24f05a9f30943
+PODFILE CHECKSUM: 99a085219fb03cb5e7c98dbea00762a0d9bb02ac
 
 COCOAPODS: 1.11.2

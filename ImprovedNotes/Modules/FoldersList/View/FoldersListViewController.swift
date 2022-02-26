@@ -14,7 +14,7 @@ final class FoldersListViewController: UIViewController {
     var output: FoldersListViewOutput?
     var viewReadyBlock: (() -> Void)?
     
-    var data = [FolderViewModel]()
+    private var viewModel: FoldersListViewModel!
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -27,9 +27,6 @@ final class FoldersListViewController: UIViewController {
         if isViewLoaded, let viewReadyBlock = viewReadyBlock {
             viewReadyBlock()
             self.viewReadyBlock = nil
-        }
-        for i in 1...30 {
-            data.append(FolderViewModel(name: "folder_\(i)"))
         }
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "folderCell")
         setupUI()
@@ -47,8 +44,6 @@ final class FoldersListViewController: UIViewController {
     // MARK: - UI
     
     private let tableView = UITableView()
-    
-    
 }
 
 
@@ -97,6 +92,7 @@ extension FoldersListViewController {
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.barStyle = .black
         searchController.searchBar.searchTextField.leftView?.tintColor = .white
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
     }
 }
@@ -104,27 +100,52 @@ extension FoldersListViewController {
 
 // MARK: - View Input
 extension FoldersListViewController: FoldersListViewInput {
+    func update(with viewModel: FoldersListViewModel) {
+        self.viewModel = viewModel
+        tableView.reloadData()
+    }
     
+    func performBatchUpdate(with viewModel: FoldersListViewModel, folderChangeItems: [ChangeItem]) {
+        self.viewModel = viewModel
+        tableView.performBatchUpdates {
+            for change in folderChangeItems {
+                switch change.type {
+                    
+                case .insert:
+                    tableView.insertRows(at: [change.newIndexPath!], with: .automatic)
+                case .delete:
+                    tableView.deleteRows(at: [change.indexPath!], with: .automatic)
+                case .move:
+                    tableView.moveRow(at: change.indexPath!, to: change.newIndexPath!)
+                case .update:
+                    tableView.reloadRows(at: [change.indexPath!], with: .automatic)
+                @unknown default:
+                    return
+                }
+            }
+        } completion: { _ in }
+        
+    }
 }
 
-
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension FoldersListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count + 1
+        (viewModel?.folders.count ?? 0) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "folderCell", for: indexPath)
         var configuration = cell.defaultContentConfiguration()
-        if indexPath.row < data.count {
-            configuration.text = data[indexPath.row].name
+        if indexPath.row < (viewModel?.folders.count ?? 0) {
+            configuration.text = viewModel.folders[indexPath.row].name
         } else {
             configuration.text = "Add folder"
             configuration.image = UIImage(systemName: "folder.badge.plus")
             configuration.imageProperties.tintColor = .white
         }
         configuration.textProperties.color = .white
-
+        
         cell.contentConfiguration = configuration
         cell.contentView.backgroundColor = Constants.Colors.backgroudColor
         return cell
@@ -132,15 +153,75 @@ extension FoldersListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row < viewModel.folders.count {
+            output?.didSelectFolder(at: indexPath.row)
+            return
+        }
+        
+        let alert = UIAlertController(title: "Add Folder", message: "", preferredStyle: .alert)
+        
+        let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+            guard let title = alert.textFields?.first?.text else { return }
+            self?.output?.didTapAddNoteButton(title: title)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        
+        alert.addTextField(configurationHandler: { $0.placeholder = "Title"})
+        
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { action -> UIMenu in
+            let rename = UIAction(title: "Rename", image: UIImage(systemName: "pencil")) { [weak self] action in
+                let alert = UIAlertController(title: "Renam", message: "", preferredStyle: .alert)
+                
+                let renameAction = UIAlertAction(title: "Rename", style: .default) { [weak self] _ in
+                    guard let title = alert.textFields?.first?.text else { return }
+                    self?.output?.didTapRename(at: indexPath.row, newTitle: title)
+                }
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                
+                alert.addTextField(configurationHandler: { $0.text = self?.viewModel.folders[indexPath.row].name })
+                
+                alert.addAction(renameAction)
+                alert.addAction(cancelAction)
+                
+                self?.present(alert, animated: true)
+            }
+            
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] action in
+                self?.output?.didTapRemoveButton(at: indexPath.row)
+            }
+            var actions = [UIAction]()
+            actions.append(rename)
+            if self.viewModel.folders.count > 1 {
+                actions.append(delete)
+            }
+            return UIMenu(title: "", children: actions)
+        }
+        return configuration
     }
 }
 
 // MARK: - UISearchResultsUpdating
 extension FoldersListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchTerm = searchController.searchBar.text else { return }
-        data = data.filter {$0.name.contains(searchTerm)}
-        tableView.reloadData()
-        print(searchTerm)
+        guard
+            let searchTerm = searchController.searchBar.text,
+            searchController.isActive
+        else { return }
+        output?.searchFolders(with: searchTerm)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension FoldersListViewController: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        output?.stopSearching()
     }
 }

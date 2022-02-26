@@ -10,7 +10,8 @@ import Foundation
 
 // MARK: - View Input
 protocol NoteViewInput: AnyObject {
-    
+    func update(with note: NoteViewModel)
+        
 }
 
 // MARK: - View Output

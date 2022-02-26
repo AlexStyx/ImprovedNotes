@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Module Input
 @objc
 protocol NoteModuleInput {
-
+    func setup(with note: Any)
 }
 
 // MARK: - Module Output

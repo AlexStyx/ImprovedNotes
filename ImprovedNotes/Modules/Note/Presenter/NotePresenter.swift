@@ -28,7 +28,10 @@ final class NotePresenter: NSObject {
 
 // MARK: - Module Input
 extension NotePresenter: NoteModuleInput {
- 
+    func setup(with note: Any) {
+        guard let note = note as? NoteViewModel else { fatalError("Note correct data") }
+        view?.update(with: note)
+    }
 }
 
 
