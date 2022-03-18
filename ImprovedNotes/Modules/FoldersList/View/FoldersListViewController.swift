@@ -15,6 +15,7 @@ final class FoldersListViewController: UIViewController {
     var viewReadyBlock: (() -> Void)?
     
     private var viewModel: FoldersListViewModel!
+    private weak var searchDebounceTimer: Timer?
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +84,11 @@ extension FoldersListViewController {
         tableView.dataSource = self
         tableView.backgroundColor = Constants.Colors.backgroudColor
         tableView.separatorColor = .clear
+        if ApplicationStateManager.shared.isFolderSortEnabled {
+            tableView.dragInteractionEnabled = true
+            tableView.dragDelegate = self
+            tableView.dropDelegate = self
+        }
     }
     
     private func setupSearchController() {
@@ -110,7 +116,6 @@ extension FoldersListViewController: FoldersListViewInput {
         tableView.performBatchUpdates {
             for change in folderChangeItems {
                 switch change.type {
-                    
                 case .insert:
                     tableView.insertRows(at: [change.newIndexPath!], with: .automatic)
                 case .delete:
@@ -161,7 +166,10 @@ extension FoldersListViewController: UITableViewDelegate, UITableViewDataSource 
         let alert = UIAlertController(title: "Add Folder", message: "", preferredStyle: .alert)
         
         let addAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
-            guard let title = alert.textFields?.first?.text else { return }
+            guard
+                let title = alert.textFields?.first?.text,
+                !title.isEmpty
+            else { return }
             self?.output?.didTapAddNoteButton(title: title)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -176,6 +184,7 @@ extension FoldersListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard indexPath.row < viewModel.folders.count else { return nil }
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { action -> UIMenu in
             let rename = UIAction(title: "Rename", image: UIImage(systemName: "pencil")) { [weak self] action in
                 let alert = UIAlertController(title: "Renam", message: "", preferredStyle: .alert)
@@ -211,11 +220,15 @@ extension FoldersListViewController: UITableViewDelegate, UITableViewDataSource 
 // MARK: - UISearchResultsUpdating
 extension FoldersListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard
-            let searchTerm = searchController.searchBar.text,
-            searchController.isActive
-        else { return }
-        output?.searchFolders(with: searchTerm)
+        searchDebounceTimer?.invalidate()
+        searchDebounceTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: { [weak self] timer in
+            self?.searchDebounceTimer?.invalidate()
+            guard
+                let searchTerm = searchController.searchBar.text,
+                searchController.isActive
+            else { return }
+            self?.output?.searchFolders(with: searchTerm)
+        })
     }
 }
 
@@ -223,5 +236,34 @@ extension FoldersListViewController: UISearchResultsUpdating {
 extension FoldersListViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         output?.stopSearching()
+    }
+}
+
+extension FoldersListViewController: UITableViewDragDelegate {
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+    
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, dragSessionAllowsMoveOperation session: UIDragSession) -> Bool {
+        return true
+    }
+}
+
+extension FoldersListViewController: UITableViewDropDelegate {
+
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        if session.localDragSession != nil {
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        guard let index = coordinator.destinationIndexPath?.row else { return }
+        output?.finishDragging(at: index)
     }
 }

@@ -21,7 +21,8 @@ final class NotesListInteractor {
         cacheTracker.delegate = self
     }
     
-    private func sortDescriptor() -> [NSSortDescriptor] {
+    // MARK: - Private
+    private func sortDescriptors() -> [NSSortDescriptor] {
         guard let currentSortValue = currentSortValue else {
             return [NSSortDescriptor(key: SortValue.allCases.first!.rawValue, ascending: false)]
         }
@@ -29,9 +30,14 @@ final class NotesListInteractor {
         return [NSSortDescriptor(key: currentSortValue.rawValue, ascending: false)]
     }
     
-    private func predicate() -> NSPredicate? {
+    private func predicate(searchTerm term: String?) -> NSPredicate? {
         guard let currentFolder = currentFolder else { return nil }
-        return NSPredicate(format: "folder == %@", currentFolder)
+        let folderPredicate = NSPredicate(format: "folder == %@", currentFolder)
+        if let term = term {
+            let searchPredicate = NSPredicate(format: "%K == %@", #keyPath(Note.title), term)
+            return NSCompoundPredicate(andPredicateWithSubpredicates: [folderPredicate, searchPredicate])
+        }
+        return folderPredicate
     }
 }
 
@@ -40,11 +46,12 @@ final class NotesListInteractor {
 extension NotesListInteractor: NotesListInteractorInput {
     func loadData(with sortValue: SortValue?) {
         let request = Note.fetchRequest()
+        currentFolder = FoldersService.shared.currentFolder()
         if let sortValue = sortValue {
             currentSortValue = sortValue
         }
-        request.predicate = predicate()
-        request.sortDescriptors = sortDescriptor()
+        request.predicate = predicate(searchTerm: nil)
+        request.sortDescriptors = sortDescriptors()
         cacheTracker.fetch(with: request)
     }
     
@@ -54,10 +61,7 @@ extension NotesListInteractor: NotesListInteractorInput {
 // MARK: - CacheTrackerDelegate
 extension NotesListInteractor: CacheTrackerDelegate {
     func cacheTracker(_ cacheTracker: CoreDataCacheTrackerProtocol, didChangeItems changeItems: [ChangeItem]) {
-        for item in changeItems {
-            let note = item.object as? Note
-            print(note?.title, item.type)
-        }
+        output?.performBatchUpdate(changeItems: changeItems)
     }
     
     func cacheTracker(_ cacheTracker: CoreDataCacheTrackerProtocol, didChangeList newList: [NSManagedObject]) {

@@ -7,67 +7,124 @@
 
 import Foundation
 import CoreData
+import UserNotifications
 
-class FoldersService {
+enum FoldersConstants {
+    static let sortStep: Int64 = 10
+}
+
+
+
+final class FoldersService {
     static let shared = FoldersService()
     
+    var entityName = "Folder"
+
     private init() {}
     
-    public func currentFolder() -> Folder {
-        let predicate = NSPredicate(format: "%K == %@", #keyPath(Folder.current), true)
-        let request = Folder.fetchRequest()
-        request.predicate = predicate
-        do {
-            let result = try CoreDataStack.shared.managedContext.fetch(request)
-            guard let currentFolder = result.first else { fatalError("cannot find Current folder") }
-            return currentFolder
-        } catch let error as NSError {
-            fatalError(error.localizedDescription)
-        }
+    // MARK: - Public
+    public func currentFolder() -> Folder? {
+        let predicate = NSPredicate(format: "%K == %d", #keyPath(Folder.current), true)
+        return CoreDataStore.shared.firstModel(for: Folder.self, predicate: predicate)
     }
     
     public func allFolders() -> [Folder] {
-        do {
-            return try CoreDataStack.shared.managedContext.fetch(Folder.fetchRequest())
-        } catch let error as NSError {
-            fatalError(error.localizedDescription)
-        }
+        return CoreDataStore.shared.loadModels(for: Folder.self, predicate: nil)
     }
     
     public func addFolder(with title: String) {
         let folder = Folder(context: CoreDataStack.shared.managedContext)
+        let folderId = UUID()
         folder.title = title
-        folder.current = true
-        folder.id = UUID()
+        folder.id = folderId
+        folder.sort = getSortIndexForLastFolder() + 10
+        setCurrentFolder(id: folderId)
         CoreDataStack.shared.saveContext()
     }
     
-    public func setCurrentFolder(_ currentFolder: Folder) {
-        let folderBatchUpdateRequest = NSBatchUpdateRequest(entityName: "Folder")
-        folderBatchUpdateRequest.propertiesToUpdate = [#keyPath(Folder.current): false]
-        folderBatchUpdateRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Folder.current), true)
-        folderBatchUpdateRequest.affectedStores = CoreDataStack.shared.managedContext.persistentStoreCoordinator?.persistentStores
-        do {
-            try CoreDataStack.shared.managedContext.execute(folderBatchUpdateRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-        currentFolder.current = true
-        CoreDataStack.shared.saveContext()
+    public func setCurrentFolder(id folderId: UUID) {
+        guard folderId != currentFolder()?.id else { return }
+        
+        let selectPredicate = NSPredicate(format: "id == %@", folderId.uuidString)
+        let deselectPredicate = NSPredicate(format: "id != %@", folderId.uuidString)
+        
+        let selectCacheUpdate = CacheUpdate(propertiesToUpdate: [#keyPath(Folder.current): true], predicate: selectPredicate)
+        let deselectCacheUpdate = CacheUpdate(propertiesToUpdate: [#keyPath(Folder.current): false], predicate: deselectPredicate)
+        
+        CoreDataStore.shared.update([deselectCacheUpdate, selectCacheUpdate], for: Folder.self)
+    
+        NotificationCenter.default.post(name: NSNotification.Name(DidSelectCurrentFolderNotification), object: nil)
+
     }
     
-    public func rename(_ folder: Folder, newTitle title: String) {
-        folder.title = title
-        CoreDataStack.shared.saveContext()
+    
+    public func renameFolder(with id: UUID, newTitle title: String) {
+        let predicate = NSPredicate(format: "id == %@", id.uuidString)
+        CoreDataStore.shared.update([#keyPath(Folder.title): title], for: Folder.self, predicate: predicate)
+
     }
     
-    public func remove(_ folder: Folder) {
-        CoreDataStack.shared.managedContext.delete(folder)
-        CoreDataStack.shared.saveContext()
+    public func removeFolder(with id: UUID) {
+        let predicate = NSPredicate(format: "id == %@", id.uuidString)
+        CoreDataStore.shared.deleteModels(for: Folder.self, predicate: predicate)
     }
     
     public func searchNotePredicate(with term: String) -> NSPredicate {
         return NSPredicate(format: "%K CONTAINS[c] %@", #keyPath(Folder.title), term)
     }
     
+    public func changeSortIndex(folderId: UUID, before: UUID?, after: UUID?) {
+        var newSort: Int64
+        let beforeSort = getSortForFolder(with: before)
+        let afterSort = getSortForFolder(with: after)
+        switch (before, after) {
+        case (nil, after):
+            newSort = afterSort! / 2
+        case (before, nil):
+            newSort = beforeSort! + FoldersConstants.sortStep / 2
+        case (before, after):
+            newSort = (beforeSort! + afterSort!) / 2
+            break
+        default:
+            fatalError("")
+        }
+                
+        var startSortUpdatesIfNeededSortIndex: Int64?
+        
+        if newSort == afterSort {
+            startSortUpdatesIfNeededSortIndex = afterSort
+        } else if newSort == beforeSort {
+            startSortUpdatesIfNeededSortIndex = beforeSort
+        }
+        
+        if let startSortUpdatesIfNeededSortIndex = startSortUpdatesIfNeededSortIndex {
+            updateSortIndexesForFolders(startingFrom: startSortUpdatesIfNeededSortIndex)
+        }
+        
+        let predicate = NSPredicate(format: "id == %@", folderId.uuidString)
+        CoreDataStore.shared.update([#keyPath(Folder.sort): newSort], for: Folder.self, predicate: predicate)
+    }
+    
+    // MARK: - Private
+
+    private func updateSortIndexesForFolders(startingFrom sort: Int64) {
+        let predicate = NSPredicate(format: "%K > %d", #keyPath(Folder.sort), sort)
+        let folders = CoreDataStore.shared.loadModels(for: Folder.self, predicate: predicate)
+        for folder in folders {
+            folder.sort += FoldersConstants.sortStep
+        }
+        CoreDataStack.shared.saveContext()
+    }
+    
+    private func getSortForFolder(with id: UUID?) -> Int64? {
+        guard let id = id else { return nil }
+        let predicate = NSPredicate(format: "%id == %@", id.uuidString)
+        let fetchProperties = [Folder.Properties.sort.rawValue]
+        return CoreDataStore.shared.loadTheOnlyProperties(fetchProperties, for: Folder.self, predicate: predicate)[Folder.Properties.sort.rawValue] as? Int64
+    }
+    
+    private func getSortIndexForLastFolder() -> Int64 {
+        let sortProperty = Folder.Properties.sort.rawValue
+        return CoreDataStore.shared.loadTheOnlyProperties([sortProperty], for: Folder.self, predicate: nil, sortValue: sortProperty, ascending: false, fetchLimit: 1)[sortProperty] as? Int64 ?? 0
+    }
 }

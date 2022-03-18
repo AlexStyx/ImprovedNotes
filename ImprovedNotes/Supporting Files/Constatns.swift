@@ -7,6 +7,8 @@
 
 import UIKit
 
+let ChangeCurrentFolderNotification = "ChangeCurrentFolderNotification"
+
 enum Constants {
     enum Colors {
         static let backgroudColor = UIColor(named: "backgroudColor")

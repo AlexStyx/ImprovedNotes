@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -20,17 +21,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = UINavigationController()
+//        window?.rootViewController = UINavigationController()
+        window?.rootViewController = UIHostingController(rootView: AuthView())
         window?.makeKeyAndVisible()
         
-        let foldersListAssembly = FoldersListAssembly()
-        foldersListAssembly.assembleModule(moduleOutput: nil, transition: nil, completion: nil)
-        let notesListAssembly = NotesListAssembly()
-        notesListAssembly.assembleModule(moduleOutput: nil) { [weak self] router in
-            if let viewController = self?.window?.rootViewController {
-                router.openModuleFrom(viewController: viewController)
-            }
-        } completion: { _ in }
+//        let foldersListAssembly = FoldersListAssembly()
+//        foldersListAssembly.assembleModule(moduleOutput: nil, transition: nil, completion: nil)
+//        let notesListAssembly = NotesListAssembly()
+//        notesListAssembly.assembleModule(moduleOutput: nil) { [weak self] router in
+//            if let viewController = self?.window?.rootViewController {
+//                router.openModuleFrom(viewController: viewController)
+//            }
+//        } completion: { _ in }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

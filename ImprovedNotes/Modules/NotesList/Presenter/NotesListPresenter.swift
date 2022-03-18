@@ -19,6 +19,21 @@ final class NotesListPresenter: NSObject {
     
     private var viewModel = NotesListViewModel(notes: [], isEditing: false)
     
+    
+    override init() {
+        super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDidSelectCurrentFolderNotification), name: NSNotification.Name(DidSelectCurrentFolderNotification), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    @objc private func handleDidSelectCurrentFolderNotification() {
+        interactor?.loadData(with: nil)
+    }
+    
 }
 
 
@@ -32,11 +47,40 @@ extension NotesListPresenter: NotesListModuleInput {
 // MARK: - Interactor Output
 extension NotesListPresenter: NotesListInteractorOutput {
     func didChangeList(notes: [Note]) {
+        var newViewModels = [NoteViewModel]()
         for note in notes {
             let noteViewModel = NoteViewModel(note: note)
-            viewModel.notes.append(noteViewModel)
+            newViewModels.append(noteViewModel)
         }
+        viewModel.notes = newViewModels
         view?.update(with: viewModel)
+    }
+    
+    func performBatchUpdate(changeItems: [ChangeItem]) {
+        for change in changeItems {
+            guard let note = change.object as? Note else { return }
+            switch (change.type) {
+            case .insert:
+                guard let index = change.newIndexPath?.row else { return }
+                let folderViewModel = NoteViewModel(note: note)
+                viewModel.notes.insert(folderViewModel, at: index)
+            case .delete:
+                guard let index = change.indexPath?.row else { return }
+                viewModel.notes.remove(at: index)
+            case .move:
+                guard let sourceIndex = change.indexPath?.row,
+                      let destinationIndex = change.newIndexPath?.row
+                else { return }
+                viewModel.notes.swapAt(sourceIndex, destinationIndex)
+            case .update:
+                guard let index = change.indexPath?.row else { return }
+                let updatedFolderViewModel = NoteViewModel(note: note)
+                viewModel.notes[index] = updatedFolderViewModel
+            @unknown default:
+                return
+            }
+        }
+        view?.performBatchUpdate(with: viewModel, changeItems: changeItems)
     }
 }
 
@@ -49,7 +93,7 @@ extension NotesListPresenter: NotesListViewOutput {
     }
     
     func didTriggerViewWillAppearEvent() {
-        
+        interactor?.loadData(with: nil)
     }
     
     func didTapAddNoteButton() {

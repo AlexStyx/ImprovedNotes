@@ -17,6 +17,7 @@ protocol FoldersListInteractorInput {
     func renameFolder(withId id: UUID, newTitle: String)
     func searchFolders(with term: String)
     func stopSeaching()
+    func changePositionForFolder(withId id: UUID, before: UUID?, after: UUID?)
 }
 
 // MARK: - Interactor Output

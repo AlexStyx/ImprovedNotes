@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class ApplicationStateManager {
+    
+    var isFolderSortEnabled = false
+    
+    static let shared = ApplicationStateManager()
+    
+    private init() {}
+}

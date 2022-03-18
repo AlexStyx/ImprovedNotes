@@ -10,7 +10,10 @@ import UIKit
 import SideMenu
 
 class FoldersListRouter: BaseSwiftRouter {
-    
+    override func closeModule() {
+        super.closeModule()
+        view?.dismiss(animated: true)
+    }
 }
 
 

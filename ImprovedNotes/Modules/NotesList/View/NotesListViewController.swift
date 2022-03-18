@@ -10,6 +10,7 @@ import UIKit
 import SideMenu
 import SnapKit
 import CoreData
+import AVKit
 
 final class NotesListViewController: UIViewController {
     
@@ -17,6 +18,7 @@ final class NotesListViewController: UIViewController {
     var viewReadyBlock: (() -> Void)?
     
     private var viewModel: NotesListViewModel!
+    private var seachDebounceTimer: Timer?
     
     private lazy var settingsMenuCurrentYPosition: CGFloat = 0.0
     
@@ -69,6 +71,13 @@ final class NotesListViewController: UIViewController {
         $0.addGestureRecognizer(tap)
         return $0
     }(UIVisualEffectView())
+  
+    private lazy var tapToAddFirstButton: UIButton = {
+        $0.configuration = .plain()
+        $0.configuration?.baseForegroundColor = .white
+        $0.configuration?.title = "Tap to add ----->"
+        return $0
+    }(UIButton())
 
     
     private let colors = [
@@ -89,6 +98,9 @@ final class NotesListViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewDidLoad() {
@@ -114,6 +126,26 @@ final class NotesListViewController: UIViewController {
         updateNavigationBar()
         updateToolBar()
         updateCollectionView()
+    }
+    
+    func performBatchUpdate(with viewModel: NotesListViewModel, changeItems: [ChangeItem]) {
+        self.viewModel = viewModel
+        collectionView.performBatchUpdates {
+            for change in changeItems {
+                switch change.type {
+                case .insert:
+                    collectionView.insertItems(at: [change.newIndexPath!])
+                case .delete:
+                    collectionView.deleteItems(at: [change.indexPath!])
+                case .move:
+                    collectionView.moveItem(at: change.indexPath!, to: change.newIndexPath!)
+                case .update:
+                    collectionView.reloadItems(at: [change.indexPath!])
+                @unknown default:
+                    return
+                }
+            }
+        } completion: { _ in }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -156,6 +188,7 @@ extension NotesListViewController {
             collectionView,
             blurView,
             floatingButton,
+            tapToAddFirstButton,
             settingsView,
         ])
         
@@ -179,6 +212,12 @@ extension NotesListViewController {
             make.width.equalTo(50)
             make.height.equalTo(50)
 
+        }
+        
+        tapToAddFirstButton.snp.makeConstraints { make in
+            make.trailing.equalTo(floatingButton.snp.leading).offset(-10)
+            make.height.equalTo(floatingButton)
+            make.centerY.equalTo(floatingButton)
         }
         
         let settingsViewDefaultFrame = CGRect(x: .zero, y: view.bounds.height, width: view.bounds.width, height: 200)
@@ -227,6 +266,7 @@ extension NotesListViewController {
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.barStyle = .black
         searchController.searchBar.searchTextField.leftView?.tintColor = .white
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
     }
 }
@@ -246,7 +286,31 @@ extension NotesListViewController {
     }
     
     @objc private func createNoteButtonTapped() {
-        output?.didTapAddNoteButton()
+//        output?.didTapAddNoteButton()
+        let alert = UIAlertController(title: "Add Folder", message: "", preferredStyle: .alert)
+        
+        let addAction = UIAlertAction(title: "Add", style: .default) { _ in
+            guard
+                let title = alert.textFields?.first?.text,
+                !title.isEmpty
+            else { return }
+            let note = Note(context: CoreDataStack.shared.managedContext)
+            note.title = title
+            note.id = UUID()
+            note.dateCreated = Date()
+            FoldersService.shared.currentFolder()?.addToNotes(note)
+            CoreDataStack.shared.saveContext()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        
+        alert.addTextField(configurationHandler: { $0.placeholder = "Title"})
+        
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+        
     }
     
     @objc private func moveToButtonTapped() {
@@ -324,6 +388,12 @@ extension NotesListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchTerm = searchController.searchBar.text else { return }
         print(searchTerm)
+    }
+}
+
+extension NotesListViewController: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
     }
 }
 

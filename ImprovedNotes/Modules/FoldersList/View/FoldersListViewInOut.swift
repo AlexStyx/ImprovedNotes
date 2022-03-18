@@ -18,10 +18,19 @@ protocol FoldersListViewInput: AnyObject {
 protocol FoldersListViewOutput {
     func didTriggerViewReadyEvent()
     func didTriggerViewWillAppearEvent()
+    
+    // edit
+    func didTapRename(at index: Int, newTitle: String)
     func didSelectFolder(at index: Int)
     func didTapAddNoteButton(title: String)
     func didTapRemoveButton(at index: Int)
-    func didTapRename(at index: Int, newTitle: String)
+
+    // search
     func searchFolders(with term: String)
     func stopSearching()
+    
+    // sort
+    func didSwapRows(sourceIndex: Int, destinationIndex: Int)
+    func finishDragging(at index: Int)
+    
 }

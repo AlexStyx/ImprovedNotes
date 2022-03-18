@@ -16,4 +16,5 @@ protocol NotesListInteractorInput {
 // MARK: - Interactor Output
 protocol NotesListInteractorOutput: AnyObject {
     func didChangeList(notes: [Note])
+    func performBatchUpdate(changeItems: [ChangeItem])
 }

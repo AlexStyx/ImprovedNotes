@@ -44,3 +44,14 @@ extension Folder {
 extension Folder : Identifiable {
 
 }
+
+// MARK: - Properties
+extension Folder {
+    enum Properties: String {
+        case id
+        case sort
+        case title
+        case current
+        case notes
+    }
+}

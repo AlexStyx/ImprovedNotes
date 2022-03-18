@@ -70,6 +70,9 @@ extension FoldersListPresenter: FoldersListInteractorOutput {
 
 // MARK: - View Output
 extension FoldersListPresenter: FoldersListViewOutput {
+    func didSwapRows(sourceIndex: Int, destinationIndex: Int) {
+    }
+    
     
     func didTriggerViewReadyEvent() {
         interactor?.loadData()
@@ -82,6 +85,7 @@ extension FoldersListPresenter: FoldersListViewOutput {
     func didSelectFolder(at index: Int) {
         let folderViewModel = viewModel.folders[index]
         interactor?.didSelectFolder(withId: folderViewModel.id)
+        router?.closeModule()
     }
     
     func didTapAddNoteButton(title: String) {
@@ -105,6 +109,20 @@ extension FoldersListPresenter: FoldersListViewOutput {
     func stopSearching() {
         interactor?.stopSeaching()
     }
-   
+    
+    func finishDragging(at index: Int) {
+        let folderViewModel = viewModel.folders[index]
+        var previousFolder: FolderViewModel? = nil
+        var nextFolder: FolderViewModel? = nil
+        if index > 0 {
+            previousFolder = viewModel.folders[index - 1]
+        }
+        
+        if index < viewModel.folders.count - 1 {
+            nextFolder = viewModel.folders[index + 1]
+        }
+        
+        interactor?.changePositionForFolder(withId: folderViewModel.id, before: previousFolder?.id, after: nextFolder?.id)
+    }
     
 }

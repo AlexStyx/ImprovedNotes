@@ -9,5 +9,4 @@ target 'ImprovedNotes' do
 
   pod 'SnapKit', '~> 5.0.0'
   pod 'SideMenu' 
-  pod 'SwiftReorder', '~> 7.2'
 end

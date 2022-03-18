@@ -11,6 +11,7 @@ import Foundation
 // MARK: - View Input
 protocol NotesListViewInput: AnyObject {
     func update(with viewModel: NotesListViewModel)
+    func performBatchUpdate(with viewModel: NotesListViewModel, changeItems: [ChangeItem])
 }
 
 // MARK: - View Output

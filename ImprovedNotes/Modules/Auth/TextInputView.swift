@@ -8,13 +8,26 @@
 import SwiftUI
 
 struct TextInputView: View {
+    @Binding var text: String
+    var placeholder: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TextField(placeholder, text: $text)
+            .frame(height: 45)
+            .textFieldStyle(PlainTextFieldStyle())
+            .padding([.horizontal], 15)
+            .cornerRadius(16)
+            .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.white))
+            .padding([.horizontal], 24)
+            .foregroundColor(.white)
+            .onChange(of: text) { newValue in
+            }
+        
     }
 }
 
 struct TextInputView_Previews: PreviewProvider {
     static var previews: some View {
-        TextInputView()
+        TextInputView(text: .constant("Test"), placeholder: "Email")
     }
 }

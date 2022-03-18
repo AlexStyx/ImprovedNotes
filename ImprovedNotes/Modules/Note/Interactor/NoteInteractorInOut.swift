@@ -15,5 +15,5 @@ protocol NoteInteractorInput {
 
 // MARK: - Interactor Output
 protocol NoteInteractorOutput: AnyObject {
-
+    
 }

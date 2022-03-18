@@ -21,6 +21,8 @@ class NotesListLayout: UICollectionViewLayout {
     
     private var cache: [UICollectionViewLayoutAttributes] = []
     
+    private var numberOfItems: Int = 0
+    
     private var contentHeight: CGFloat = 0
     
     private var contentWidth: CGFloat {
@@ -37,10 +39,11 @@ class NotesListLayout: UICollectionViewLayout {
     override func prepare() {
         guard
             let collectioView = collectionView,
-            cache.isEmpty
+            (cache.isEmpty || collectioView.numberOfItems(inSection: 0) != numberOfItems)
         else {
             return
         }
+        numberOfItems = collectioView.numberOfItems(inSection: 0)
         
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset: [CGFloat] = []
