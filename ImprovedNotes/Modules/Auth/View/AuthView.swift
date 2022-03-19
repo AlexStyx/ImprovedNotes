@@ -27,7 +27,7 @@ struct AuthView: View {
                     .foregroundColor(.white)
                     .font(.custom("Marker Felt", size: 40))
                 
-                if viewModel.loginSuccess {
+                if !viewModel.loginSuccss{
                     Text("Invalid email or password")
                         .foregroundColor(.red)
                 }

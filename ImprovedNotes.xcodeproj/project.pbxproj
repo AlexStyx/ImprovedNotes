@@ -19,6 +19,8 @@
 		3C41150A674D58BE1FB616B0 /* FoldersListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BACBA96FCF6FDC999D7BAF /* FoldersListAssembly.swift */; };
 		41DDBE54AAC8208DBFF4BC9C /* NotesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139694EFBD6CE67D95E5C8FE /* NotesListPresenter.swift */; };
 		5911D0152ACB770720545599 /* NoteViewInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFEB502B982E1115E8385A7 /* NoteViewInOut.swift */; };
+		5F04F40727E59775006A5206 /* INUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F04F40527E59775006A5206 /* INUser+CoreDataClass.swift */; };
+		5F04F40827E59775006A5206 /* INUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F04F40627E59775006A5206 /* INUser+CoreDataProperties.swift */; };
 		5F2DC9E627B7CDDE003C330E /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2DC9E527B7CDDE003C330E /* NoteService.swift */; };
 		5F2DC9E827B7CDEC003C330E /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2DC9E727B7CDEC003C330E /* FolderService.swift */; };
 		5F3A6AAA27DDDFC10057643E /* ApplicationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3A6AA927DDDFC10057643E /* ApplicationStateManager.swift */; };
@@ -96,6 +98,8 @@
 		45FDE2D3EF6C20D1A6842B9A /* NotesListRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListRouterInput.swift; sourceTree = "<group>"; };
 		4A77FC1C6017BF932B61DE10 /* NoteRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteRouter.swift; sourceTree = "<group>"; };
 		52B5A530FCAEE30370ED2BAF /* NotesListInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListInteractor.swift; sourceTree = "<group>"; };
+		5F04F40527E59775006A5206 /* INUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "INUser+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		5F04F40627E59775006A5206 /* INUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "INUser+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5F2DC9E527B7CDDE003C330E /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		5F2DC9E727B7CDEC003C330E /* FolderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderService.swift; sourceTree = "<group>"; };
 		5F3A6AA927DDDFC10057643E /* ApplicationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStateManager.swift; sourceTree = "<group>"; };
@@ -279,6 +283,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		5F04F40027E593A8006A5206 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				5F04F40527E59775006A5206 /* INUser+CoreDataClass.swift */,
+				5F04F40627E59775006A5206 /* INUser+CoreDataProperties.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		5F5C816D27B7AD0D00EE6938 /* Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +400,7 @@
 		5F98067727A6FD4B0030D926 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5F04F40027E593A8006A5206 /* User */,
 				5F5C816D27B7AD0D00EE6938 /* Content */,
 				5F98068127A6FD940030D926 /* Folder */,
 				5F98068027A6FD860030D926 /* Note */,
@@ -785,8 +799,10 @@
 				7B75370FC634C9FB341EAE7F /* FoldersListInteractorInOut.swift in Sources */,
 				5FE0950C27CD5CD300154879 /* AddFirstNoteView.swift in Sources */,
 				5F98E2A027A32F4500E3C5D5 /* NoteTransition.swift in Sources */,
+				5F04F40827E59775006A5206 /* INUser+CoreDataProperties.swift in Sources */,
 				016E7E63CED4425BD427DD33 /* FoldersListInteractor.swift in Sources */,
 				1FEB398B843EE4A7FDC5DD1A /* FoldersListModuleInOut.swift in Sources */,
+				5F04F40727E59775006A5206 /* INUser+CoreDataClass.swift in Sources */,
 				5F4A8E9227C68C7B004A8606 /* ChangeItem.swift in Sources */,
 				393E6BFF55E471F5DB715F7B /* FoldersListPresenter.swift in Sources */,
 				5F5C816827B7ACEA00EE6938 /* Note+CoreDataProperties.swift in Sources */,

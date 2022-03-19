@@ -13,6 +13,12 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="folder" inverseEntity="Note"/>
     </entity>
+    <entity name="INUser" representedClassName="INUser" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="login" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="reference" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">
         <attribute name="dateChanged" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -27,5 +33,6 @@
         <element name="ContentItem" positionX="-45" positionY="63" width="128" height="89"/>
         <element name="Folder" positionX="-63" positionY="-18" width="128" height="104"/>
         <element name="Note" positionX="-54" positionY="-9" width="128" height="149"/>
+        <element name="INUser" positionX="-63" positionY="63" width="128" height="89"/>
     </elements>
 </model>
