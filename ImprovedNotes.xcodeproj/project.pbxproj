@@ -53,6 +53,11 @@
 		5FD5576227E3BE6400001015 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD5576127E3BE6400001015 /* CoreDataStore.swift */; };
 		5FD8BBEA2797422700781187 /* BaseSwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8BBE92797422700781187 /* BaseSwiftRouter.swift */; };
 		5FD8BBEC27974FEE00781187 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD8BBEB27974FED00781187 /* NoteCell.swift */; };
+		5FDB68C527E52BCE00E923E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FDB68C427E52BCE00E923E0 /* GoogleService-Info.plist */; };
+		5FDB68C727E52CF900E923E0 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDB68C627E52CF900E923E0 /* UserService.swift */; };
+		5FDB68CA27E52E4700E923E0 /* ChangeStateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDB68C927E52E4700E923E0 /* ChangeStateButton.swift */; };
+		5FDB68CD27E5315800E923E0 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDB68CC27E5315800E923E0 /* AuthViewModel.swift */; };
+		5FDB68CF27E532A900E923E0 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDB68CE27E532A900E923E0 /* AuthCoordinator.swift */; };
 		5FDB7A0027C17F4C0005B094 /* NotesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDB79FF27C17F4C0005B094 /* NotesListViewModel.swift */; };
 		5FE0950C27CD5CD300154879 /* AddFirstNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE0950B27CD5CD300154879 /* AddFirstNoteView.swift */; };
 		5FE5193527C57FC200148529 /* CoreDataCacheTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE5193427C57FC200148529 /* CoreDataCacheTracker.swift */; };
@@ -127,6 +132,11 @@
 		5FD5576127E3BE6400001015 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		5FD8BBE92797422700781187 /* BaseSwiftRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSwiftRouter.swift; sourceTree = "<group>"; };
 		5FD8BBEB27974FED00781187 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		5FDB68C427E52BCE00E923E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5FDB68C627E52CF900E923E0 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		5FDB68C927E52E4700E923E0 /* ChangeStateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeStateButton.swift; sourceTree = "<group>"; };
+		5FDB68CC27E5315800E923E0 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		5FDB68CE27E532A900E923E0 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		5FDB79FF27C17F4C0005B094 /* NotesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewModel.swift; sourceTree = "<group>"; };
 		5FE0950B27CD5CD300154879 /* AddFirstNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFirstNoteView.swift; sourceTree = "<group>"; };
 		5FE5193427C57FC200148529 /* CoreDataCacheTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCacheTracker.swift; sourceTree = "<group>"; };
@@ -281,9 +291,9 @@
 		5F68727B27DE018F00D88075 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				5F68727C27DE019800D88075 /* AuthView.swift */,
-				5FBED57627DE1BEA00EA52F2 /* TextInputView.swift */,
-				5FBED57827DE249600EA52F2 /* LoginButton.swift */,
+				5FDB68CE27E532A900E923E0 /* AuthCoordinator.swift */,
+				5FDB68CB27E5314A00E923E0 /* ViewModel */,
+				5FDB68C827E52E3600E923E0 /* View */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -319,6 +329,7 @@
 				5F933A53279C4D540076D5C9 /* Supporting Files */,
 				5F933A56279C4F190076D5C9 /* Extensions */,
 				5F6D768227945846007538EF /* Info.plist */,
+				5FDB68C427E52BCE00E923E0 /* GoogleService-Info.plist */,
 				5FED53AE27C7FB14001DC9A7 /* AlertViewer.swift */,
 				5F3A6AA927DDDFC10057643E /* ApplicationStateManager.swift */,
 				5F3A6AAB27DDE7840057643E /* LocalConstants.swift */,
@@ -427,6 +438,7 @@
 			children = (
 				5F2DC9E527B7CDDE003C330E /* NoteService.swift */,
 				5F2DC9E727B7CDEC003C330E /* FolderService.swift */,
+				5FDB68C627E52CF900E923E0 /* UserService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -452,10 +464,10 @@
 		5FD8BBE7279741BD00781187 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				11E14B3DDC9F9D572DAD9A57 /* FoldersList */,
 				5F68727B27DE018F00D88075 /* Auth */,
 				20CBC377F0B3FDB2AD756711 /* NotesList */,
 				798C10768E292DA017C59AA2 /* Note */,
-				11E14B3DDC9F9D572DAD9A57 /* FoldersList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -474,6 +486,25 @@
 				5FD8BBEB27974FED00781187 /* NoteCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		5FDB68C827E52E3600E923E0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5F68727C27DE019800D88075 /* AuthView.swift */,
+				5FBED57627DE1BEA00EA52F2 /* TextInputView.swift */,
+				5FBED57827DE249600EA52F2 /* LoginButton.swift */,
+				5FDB68C927E52E4700E923E0 /* ChangeStateButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5FDB68CB27E5314A00E923E0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5FDB68CC27E5315800E923E0 /* AuthViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5FF97BB72797D63800522F11 /* ViewModels */ = {
@@ -642,6 +673,7 @@
 				5FFA1A872798B47E00FE0FC6 /* Colors.xcassets in Resources */,
 				5F6D768127945846007538EF /* LaunchScreen.storyboard in Resources */,
 				5F6D767E27945846007538EF /* Assets.xcassets in Resources */,
+				5FDB68C527E52BCE00E923E0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +736,7 @@
 				5F5C816727B7ACEA00EE6938 /* Note+CoreDataClass.swift in Sources */,
 				5F98068427A707850030D926 /* ContentViewModel.swift in Sources */,
 				5FED53AF27C7FB14001DC9A7 /* AlertViewer.swift in Sources */,
+				5FDB68CD27E5315800E923E0 /* AuthViewModel.swift in Sources */,
 				5FF97BB92797D64600522F11 /* NoteViewModel.swift in Sources */,
 				5F49BC4E27E050860054CD59 /* BaseListInteractor.swift in Sources */,
 				80DD950F2000E62DD2448BFB /* NotesListInteractor.swift in Sources */,
@@ -712,6 +745,7 @@
 				F51B6147A0748C2388E5BEFD /* NotesListModuleInOut.swift in Sources */,
 				5F5C816927B7ACEA00EE6938 /* Folder+CoreDataClass.swift in Sources */,
 				41DDBE54AAC8208DBFF4BC9C /* NotesListPresenter.swift in Sources */,
+				5FDB68CA27E52E4700E923E0 /* ChangeStateButton.swift in Sources */,
 				144DA96E8E87B78AE6028D43 /* NotesListRouterInput.swift in Sources */,
 				276713974D5F240D4DB099FE /* NotesListRouter.swift in Sources */,
 				5F933A58279C4F2D0076D5C9 /* UIView+extensions.swift in Sources */,
@@ -734,6 +768,7 @@
 				5F68727D27DE019800D88075 /* AuthView.swift in Sources */,
 				5F3A6AAC27DDE7840057643E /* LocalConstants.swift in Sources */,
 				5F6DBB6E27A256A40032F596 /* FoldersListViewModel.swift in Sources */,
+				5FDB68C727E52CF900E923E0 /* UserService.swift in Sources */,
 				5F98E29B27A3284E00E3C5D5 /* CoreDataModel.xcdatamodeld in Sources */,
 				94D0F4947449AF70E990489A /* NoteModuleInOut.swift in Sources */,
 				B6BFFDC7CFB5BA0413F08984 /* NotePresenter.swift in Sources */,
@@ -745,6 +780,7 @@
 				E0ED25A0A72E2C610803A9E5 /* NoteRouter.swift in Sources */,
 				5911D0152ACB770720545599 /* NoteViewInOut.swift in Sources */,
 				0C70986FA952B85D9F74BDE6 /* NoteViewController.swift in Sources */,
+				5FDB68CF27E532A900E923E0 /* AuthCoordinator.swift in Sources */,
 				3C41150A674D58BE1FB616B0 /* FoldersListAssembly.swift in Sources */,
 				7B75370FC634C9FB341EAE7F /* FoldersListInteractorInOut.swift in Sources */,
 				5FE0950C27CD5CD300154879 /* AddFirstNoteView.swift in Sources */,

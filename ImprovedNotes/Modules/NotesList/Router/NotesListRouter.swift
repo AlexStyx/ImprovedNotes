@@ -11,6 +11,13 @@ import SideMenu
 
 final class NotesListRouter: BaseSwiftRouter {
     private var folderListRouter: FoldersListRouterInput?
+    
+    override func openModuleFrom(viewController: UIViewController) {
+        guard let strongView = view else { return }
+        view = UINavigationController(rootViewController: strongView)
+        view?.modalPresentationStyle = .fullScreen
+        super.openModuleFrom(viewController: viewController)
+    }
 }
 
 

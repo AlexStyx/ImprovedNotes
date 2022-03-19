@@ -8,5 +8,6 @@ target 'ImprovedNotes' do
   # Pods for ImprovedNotes
 
   pod 'SnapKit', '~> 5.0.0'
-  pod 'SideMenu' 
+  pod 'SideMenu'
+  pod 'Firebase/Auth'
 end

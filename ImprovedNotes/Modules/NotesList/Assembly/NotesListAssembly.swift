@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class NotesListAssembly: NSObject {
 
@@ -42,6 +43,7 @@ final class NotesListAssembly: NSObject {
     
     // MARK: - Configure dependencies
     private func configureDependenciesWithModuleOutput(moduleOutput: NotesListModuleOutput?) {
+        view.modalPresentationStyle = .fullScreen
         presenter.view = view
         view.output = presenter
         
