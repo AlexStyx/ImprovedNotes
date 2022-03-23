@@ -13,8 +13,10 @@ struct AuthView: View {
     @ObservedObject var viewModel: AuthViewModel
     @State private var login: String = ""
     @State private var password: String = ""
+    @State private var name: String = ""
     @State private var loginButtonTitle: String = "Sign Up"
     @State private var showLogin = true
+    @State private var state: AuthViewState = .login
     
     var body: some View {
         ZStack {
@@ -33,12 +35,16 @@ struct AuthView: View {
                 }
                
                 
+                if (!showLogin) {
+                    TextInputView(text: $name, placeholder: "Name")
+                }
+                
                 TextInputView(text: $login, placeholder: "Login")
                 
                 TextInputView(text: $password, placeholder: "Password")
                 
-                LoginButton(showLogin: $showLogin) {
-                    showLogin ? viewModel.signInTapped(email: login, password: password) : viewModel.registerButtonTapped(email: login, password: password)
+                LoginButton(state: $state) {
+                    showLogin ? viewModel.signInTapped(email: login, password: password) : viewModel.registerButtonTapped(email: login, password: password, name: name)
                 }
                 
                 Spacer()

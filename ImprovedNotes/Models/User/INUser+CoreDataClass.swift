@@ -8,14 +8,20 @@
 
 import Foundation
 import CoreData
-import Firebase
+import FirebaseAuth
+import FirebaseDatabase
+import SwiftUI
 
 @objc(INUser)
 public class INUser: NSManagedObject {
-    static func user(from response: User) {
-        let user = INUser(context: CoreDataStack.shared.managedContext)
-        user.id = UUID(uuidString: response.uid)
-        user.login = user.login
-    }
+
 }
 
+extension INUser {
+    static func user(from response: User) -> INUser {
+        let user = INUser(context: CoreDataStack.shared.managedContext)
+        user.id = response.uid
+        user.login = response.email
+        return user
+    }
+}

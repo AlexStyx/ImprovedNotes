@@ -19,10 +19,11 @@
 		3C41150A674D58BE1FB616B0 /* FoldersListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BACBA96FCF6FDC999D7BAF /* FoldersListAssembly.swift */; };
 		41DDBE54AAC8208DBFF4BC9C /* NotesListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139694EFBD6CE67D95E5C8FE /* NotesListPresenter.swift */; };
 		5911D0152ACB770720545599 /* NoteViewInOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFEB502B982E1115E8385A7 /* NoteViewInOut.swift */; };
-		5F04F40727E59775006A5206 /* INUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F04F40527E59775006A5206 /* INUser+CoreDataClass.swift */; };
-		5F04F40827E59775006A5206 /* INUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F04F40627E59775006A5206 /* INUser+CoreDataProperties.swift */; };
 		5F2DC9E627B7CDDE003C330E /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2DC9E527B7CDDE003C330E /* NoteService.swift */; };
 		5F2DC9E827B7CDEC003C330E /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2DC9E727B7CDEC003C330E /* FolderService.swift */; };
+		5F34FEFA27EB978F00CF57F5 /* UserReuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F34FEF927EB978F00CF57F5 /* UserReuest.swift */; };
+		5F34FEFC27EB97CB00CF57F5 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F34FEFB27EB97CB00CF57F5 /* Response.swift */; };
+		5F34FEFE27EB9FDD00CF57F5 /* AddUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F34FEFD27EB9FDD00CF57F5 /* AddUserRequest.swift */; };
 		5F3A6AAA27DDDFC10057643E /* ApplicationStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3A6AA927DDDFC10057643E /* ApplicationStateManager.swift */; };
 		5F3A6AAC27DDE7840057643E /* LocalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3A6AAB27DDE7840057643E /* LocalConstants.swift */; };
 		5F49BC4E27E050860054CD59 /* BaseListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F49BC4D27E050860054CD59 /* BaseListInteractor.swift */; };
@@ -33,11 +34,16 @@
 		5F5C816927B7ACEA00EE6938 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5C816327B7ACEA00EE6938 /* Folder+CoreDataClass.swift */; };
 		5F5C816A27B7ACEA00EE6938 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5C816427B7ACEA00EE6938 /* Folder+CoreDataProperties.swift */; };
 		5F68727D27DE019800D88075 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F68727C27DE019800D88075 /* AuthView.swift */; };
+		5F6CC8A427E5F93600BE0472 /* BaseRealtimeDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6CC8A327E5F93600BE0472 /* BaseRealtimeDatabaseModel.swift */; };
+		5F6CC8A727E5FD8800BE0472 /* INUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6CC8A527E5FD8800BE0472 /* INUser+CoreDataClass.swift */; };
+		5F6CC8A827E5FD8800BE0472 /* INUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6CC8A627E5FD8800BE0472 /* INUser+CoreDataProperties.swift */; };
 		5F6D767527945844007538EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6D767427945844007538EF /* AppDelegate.swift */; };
 		5F6D767727945844007538EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6D767627945844007538EF /* SceneDelegate.swift */; };
 		5F6D767E27945846007538EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6D767D27945846007538EF /* Assets.xcassets */; };
 		5F6D768127945846007538EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6D767F27945846007538EF /* LaunchScreen.storyboard */; };
 		5F6DBB6E27A256A40032F596 /* FoldersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6DBB6D27A256A40032F596 /* FoldersListViewModel.swift */; };
+		5F81CB0127EA56C4001A22F9 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F81CB0027EA56C4001A22F9 /* BaseRequest.swift */; };
+		5F81CB0327EA573B001A22F9 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F81CB0227EA573B001A22F9 /* BaseService.swift */; };
 		5F91DFEC27BE099B00CFB928 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F91DFEB27BE099B00CFB928 /* SettingsView.swift */; };
 		5F933A55279C4D600076D5C9 /* Constatns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F933A54279C4D600076D5C9 /* Constatns.swift */; };
 		5F933A58279C4F2D0076D5C9 /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F933A57279C4F2D0076D5C9 /* UIView+extensions.swift */; };
@@ -48,6 +54,7 @@
 		5F98E29B27A3284E00E3C5D5 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F98E29927A3284E00E3C5D5 /* CoreDataModel.xcdatamodeld */; };
 		5F98E2A027A32F4500E3C5D5 /* NoteTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F98E29F27A32F4500E3C5D5 /* NoteTransition.swift */; };
 		5F98E2A227A32F5E00E3C5D5 /* NoteTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F98E2A127A32F5E00E3C5D5 /* NoteTransitionDelegate.swift */; };
+		5F9D443827E5CC20003AAE0C /* RequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9D443727E5CC20003AAE0C /* RequestFactory.swift */; };
 		5FA0A23E27A1E06300A5ED2A /* FolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA0A23D27A1E06300A5ED2A /* FolderViewModel.swift */; };
 		5FAD0C6527C2C89500118BB9 /* Date+extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAD0C6427C2C89500118BB9 /* Date+extentions.swift */; };
 		5FBED57727DE1BEA00EA52F2 /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBED57627DE1BEA00EA52F2 /* TextInputView.swift */; };
@@ -98,10 +105,11 @@
 		45FDE2D3EF6C20D1A6842B9A /* NotesListRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListRouterInput.swift; sourceTree = "<group>"; };
 		4A77FC1C6017BF932B61DE10 /* NoteRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NoteRouter.swift; sourceTree = "<group>"; };
 		52B5A530FCAEE30370ED2BAF /* NotesListInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NotesListInteractor.swift; sourceTree = "<group>"; };
-		5F04F40527E59775006A5206 /* INUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "INUser+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		5F04F40627E59775006A5206 /* INUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "INUser+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5F2DC9E527B7CDDE003C330E /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		5F2DC9E727B7CDEC003C330E /* FolderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderService.swift; sourceTree = "<group>"; };
+		5F34FEF927EB978F00CF57F5 /* UserReuest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReuest.swift; sourceTree = "<group>"; };
+		5F34FEFB27EB97CB00CF57F5 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		5F34FEFD27EB9FDD00CF57F5 /* AddUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserRequest.swift; sourceTree = "<group>"; };
 		5F3A6AA927DDDFC10057643E /* ApplicationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStateManager.swift; sourceTree = "<group>"; };
 		5F3A6AAB27DDE7840057643E /* LocalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalConstants.swift; sourceTree = "<group>"; };
 		5F49BC4D27E050860054CD59 /* BaseListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListInteractor.swift; sourceTree = "<group>"; };
@@ -112,6 +120,9 @@
 		5F5C816327B7ACEA00EE6938 /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5F5C816427B7ACEA00EE6938 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5F68727C27DE019800D88075 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		5F6CC8A327E5F93600BE0472 /* BaseRealtimeDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRealtimeDatabaseModel.swift; sourceTree = "<group>"; };
+		5F6CC8A527E5FD8800BE0472 /* INUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "INUser+CoreDataClass.swift"; sourceTree = "<group>"; };
+		5F6CC8A627E5FD8800BE0472 /* INUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "INUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5F6D767127945844007538EF /* ImprovedNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImprovedNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6D767427945844007538EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F6D767627945844007538EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +130,8 @@
 		5F6D768027945846007538EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5F6D768227945846007538EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F6DBB6D27A256A40032F596 /* FoldersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersListViewModel.swift; sourceTree = "<group>"; };
+		5F81CB0027EA56C4001A22F9 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		5F81CB0227EA573B001A22F9 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		5F91DFEB27BE099B00CFB928 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5F933A54279C4D600076D5C9 /* Constatns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constatns.swift; sourceTree = "<group>"; };
 		5F933A57279C4F2D0076D5C9 /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
@@ -129,6 +142,7 @@
 		5F98E29A27A3284E00E3C5D5 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		5F98E29F27A32F4500E3C5D5 /* NoteTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransition.swift; sourceTree = "<group>"; };
 		5F98E2A127A32F5E00E3C5D5 /* NoteTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransitionDelegate.swift; sourceTree = "<group>"; };
+		5F9D443727E5CC20003AAE0C /* RequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFactory.swift; sourceTree = "<group>"; };
 		5FA0A23D27A1E06300A5ED2A /* FolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewModel.swift; sourceTree = "<group>"; };
 		5FAD0C6427C2C89500118BB9 /* Date+extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extentions.swift"; sourceTree = "<group>"; };
 		5FBED57627DE1BEA00EA52F2 /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
@@ -286,10 +300,19 @@
 		5F04F40027E593A8006A5206 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				5F04F40527E59775006A5206 /* INUser+CoreDataClass.swift */,
-				5F04F40627E59775006A5206 /* INUser+CoreDataProperties.swift */,
+				5F6CC8A527E5FD8800BE0472 /* INUser+CoreDataClass.swift */,
+				5F6CC8A627E5FD8800BE0472 /* INUser+CoreDataProperties.swift */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		5F34FEF727EB977100CF57F5 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				5F34FEF927EB978F00CF57F5 /* UserReuest.swift */,
+				5F34FEFD27EB9FDD00CF57F5 /* AddUserRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		5F5C816D27B7AD0D00EE6938 /* Content */ = {
@@ -309,6 +332,18 @@
 				5FDB68C827E52E3600E923E0 /* View */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		5F6CC8A227E5F92000BE0472 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				5F6CC8A327E5F93600BE0472 /* BaseRealtimeDatabaseModel.swift */,
+				5F9D443727E5CC20003AAE0C /* RequestFactory.swift */,
+				5F81CB0027EA56C4001A22F9 /* BaseRequest.swift */,
+				5F34FEFB27EB97CB00CF57F5 /* Response.swift */,
+				5F34FEF727EB977100CF57F5 /* Requests */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		5F6D766827945844007538EF = {
@@ -332,6 +367,7 @@
 		5F6D767327945844007538EF /* ImprovedNotes */ = {
 			isa = PBXGroup;
 			children = (
+				5F6CC8A227E5F92000BE0472 /* Firebase */,
 				5FD8BBE82797422700781187 /* Navigation */,
 				5F98067727A6FD4B0030D926 /* Models */,
 				5F98E29E27A32D5B00E3C5D5 /* Services */,
@@ -453,6 +489,7 @@
 				5F2DC9E527B7CDDE003C330E /* NoteService.swift */,
 				5F2DC9E727B7CDEC003C330E /* FolderService.swift */,
 				5FDB68C627E52CF900E923E0 /* UserService.swift */,
+				5F81CB0227EA573B001A22F9 /* BaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -742,9 +779,11 @@
 			files = (
 				5F6D767527945844007538EF /* AppDelegate.swift in Sources */,
 				5FD8BBEC27974FEE00781187 /* NoteCell.swift in Sources */,
+				5F34FEFA27EB978F00CF57F5 /* UserReuest.swift in Sources */,
 				5FE5193727C57FEB00148529 /* CacheRequest.swift in Sources */,
 				5FAD0C6527C2C89500118BB9 /* Date+extentions.swift in Sources */,
 				5F6D767727945844007538EF /* SceneDelegate.swift in Sources */,
+				5F9D443827E5CC20003AAE0C /* RequestFactory.swift in Sources */,
 				FFAA4B812BBC2A5B50751182 /* NotesListAssembly.swift in Sources */,
 				BFE0A19CB98364C493A15937 /* NotesListInteractorInOut.swift in Sources */,
 				5F5C816727B7ACEA00EE6938 /* Note+CoreDataClass.swift in Sources */,
@@ -756,6 +795,7 @@
 				80DD950F2000E62DD2448BFB /* NotesListInteractor.swift in Sources */,
 				5F91DFEC27BE099B00CFB928 /* SettingsView.swift in Sources */,
 				5F3A6AAA27DDDFC10057643E /* ApplicationStateManager.swift in Sources */,
+				5F6CC8A427E5F93600BE0472 /* BaseRealtimeDatabaseModel.swift in Sources */,
 				F51B6147A0748C2388E5BEFD /* NotesListModuleInOut.swift in Sources */,
 				5F5C816927B7ACEA00EE6938 /* Folder+CoreDataClass.swift in Sources */,
 				41DDBE54AAC8208DBFF4BC9C /* NotesListPresenter.swift in Sources */,
@@ -770,11 +810,13 @@
 				5F933A55279C4D600076D5C9 /* Constatns.swift in Sources */,
 				5FBED57927DE249600EA52F2 /* LoginButton.swift in Sources */,
 				5FF2EF6E27BD87E100C04DEC /* String+extensions.swift in Sources */,
+				5F81CB0327EA573B001A22F9 /* BaseService.swift in Sources */,
 				CDFB5F2AF80D0DBF9F8993F7 /* NotesListViewController.swift in Sources */,
 				36D8854739074ACD788A402E /* NoteAssembly.swift in Sources */,
 				087865C2DC1B93A26A8F9CAD /* NoteInteractorInOut.swift in Sources */,
 				5F5C816A27B7ACEA00EE6938 /* Folder+CoreDataProperties.swift in Sources */,
 				5F2DC9E827B7CDEC003C330E /* FolderService.swift in Sources */,
+				5F34FEFC27EB97CB00CF57F5 /* Response.swift in Sources */,
 				5F4A8E9427C6A5BB004A8606 /* SortValue.swift in Sources */,
 				F73301A954AA9186600EA737 /* NoteInteractor.swift in Sources */,
 				5FE5193527C57FC200148529 /* CoreDataCacheTracker.swift in Sources */,
@@ -783,8 +825,11 @@
 				5F3A6AAC27DDE7840057643E /* LocalConstants.swift in Sources */,
 				5F6DBB6E27A256A40032F596 /* FoldersListViewModel.swift in Sources */,
 				5FDB68C727E52CF900E923E0 /* UserService.swift in Sources */,
+				5F34FEFE27EB9FDD00CF57F5 /* AddUserRequest.swift in Sources */,
 				5F98E29B27A3284E00E3C5D5 /* CoreDataModel.xcdatamodeld in Sources */,
+				5F6CC8A827E5FD8800BE0472 /* INUser+CoreDataProperties.swift in Sources */,
 				94D0F4947449AF70E990489A /* NoteModuleInOut.swift in Sources */,
+				5F6CC8A727E5FD8800BE0472 /* INUser+CoreDataClass.swift in Sources */,
 				B6BFFDC7CFB5BA0413F08984 /* NotePresenter.swift in Sources */,
 				B54D0F251627C24C36E22052 /* NoteRouterInput.swift in Sources */,
 				5F98E2A227A32F5E00E3C5D5 /* NoteTransitionDelegate.swift in Sources */,
@@ -799,14 +844,13 @@
 				7B75370FC634C9FB341EAE7F /* FoldersListInteractorInOut.swift in Sources */,
 				5FE0950C27CD5CD300154879 /* AddFirstNoteView.swift in Sources */,
 				5F98E2A027A32F4500E3C5D5 /* NoteTransition.swift in Sources */,
-				5F04F40827E59775006A5206 /* INUser+CoreDataProperties.swift in Sources */,
 				016E7E63CED4425BD427DD33 /* FoldersListInteractor.swift in Sources */,
 				1FEB398B843EE4A7FDC5DD1A /* FoldersListModuleInOut.swift in Sources */,
-				5F04F40727E59775006A5206 /* INUser+CoreDataClass.swift in Sources */,
 				5F4A8E9227C68C7B004A8606 /* ChangeItem.swift in Sources */,
 				393E6BFF55E471F5DB715F7B /* FoldersListPresenter.swift in Sources */,
 				5F5C816827B7ACEA00EE6938 /* Note+CoreDataProperties.swift in Sources */,
 				10C003F355BC503484299B8A /* FoldersListRouterInput.swift in Sources */,
+				5F81CB0127EA56C4001A22F9 /* BaseRequest.swift in Sources */,
 				816EF55A9438AFC21B8FC5CE /* FoldersListRouter.swift in Sources */,
 				5F98E29627A3270E00E3C5D5 /* CoreDataStack.swift in Sources */,
 				A230A7AC88444A365CDE472D /* FoldersListViewInOut.swift in Sources */,

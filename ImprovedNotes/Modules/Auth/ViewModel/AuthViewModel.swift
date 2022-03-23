@@ -7,13 +7,24 @@
 
 import Foundation
 
+
+enum AuthViewState {
+    case login
+    case register
+    
+    mutating func toggle() {
+        self = self == .login ? .register : .login
+    }
+}
+
+
 final class AuthViewModel: ObservableObject {
     
     @Published var loginSuccss = true
     
     var coordinator: AuthCoordinatorProtocol!
     
-    func registerButtonTapped(email: String?, password: String?) {
+    func registerButtonTapped(email: String?, password: String?, name: String) {
         guard
             let email = email,
             let password = password
@@ -22,7 +33,7 @@ final class AuthViewModel: ObservableObject {
             return
         }
         
-        UserService.shared.registerUser(email: email, password: password) { [weak self] success in
+        UserService.shared.registerUser(email: email, password: password, name: name) { [weak self] success in
             guard let strongSelf = self else { return }
             strongSelf.handleAuthResponse(success, error: nil)
         }
@@ -50,10 +61,12 @@ final class AuthViewModel: ObservableObject {
         else {
             return
         }
-        loginSuccss = result
-        if loginSuccss {
-            coordinator.goToNotesList()
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.loginSuccss = result
+            if strongSelf.loginSuccss {
+                strongSelf.coordinator.goToNotesList()
+            }
         }
-
     }
 }

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct LoginButton: View {
-    @Binding var showLogin: Bool
+    @Binding var state: AuthViewState
     var didTap: () -> ()
     var body: some View {
-        Button(showLogin ? "Log In" : "Sign Up") {
+        Button(state == .login ? "Log In" : "Sign Up") {
            didTap()
         }
         .frame(width:130, height:45)
@@ -24,6 +24,6 @@ struct LoginButton: View {
 
 struct LoginButton_Previews: PreviewProvider {
     static var previews: some View {
-        LoginButton(showLogin: .constant(true)) {}
+        LoginButton(state: .constant(.login)) {}
     }
 }

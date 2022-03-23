@@ -287,29 +287,29 @@ extension NotesListViewController {
     
     @objc private func createNoteButtonTapped() {
         output?.didTapAddNoteButton()
-//        let alert = UIAlertController(title: "Add Folder", message: "", preferredStyle: .alert)
-//        
-//        let addAction = UIAlertAction(title: "Add", style: .default) { _ in
-//            guard
-//                let title = alert.textFields?.first?.text,
-//                !title.isEmpty
-//            else { return }
-//            let note = Note(context: CoreDataStack.shared.managedContext)
-//            note.title = title
-//            note.id = UUID()
-//            note.dateCreated = Date()
-//            FoldersService.shared.currentFolder()?.addToNotes(note)
-//            CoreDataStack.shared.saveContext()
-//        }
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        
-//        
-//        alert.addTextField(configurationHandler: { $0.placeholder = "Title"})
-//        
-//        alert.addAction(addAction)
-//        alert.addAction(cancelAction)
-//        
-//        present(alert, animated: true)
+        let alert = UIAlertController(title: "Add Folder", message: "", preferredStyle: .alert)
+
+        let addAction = UIAlertAction(title: "Add", style: .default) { _ in
+            guard
+                let title = alert.textFields?.first?.text,
+                !title.isEmpty
+            else { return }
+            let note = Note(context: CoreDataStack.shared.managedContext)
+            note.title = title
+            note.id = UUID()
+            note.dateCreated = Date()
+            FoldersService.shared.currentFolder()?.addToNotes(note)
+            CoreDataStack.shared.saveContext()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+
+        alert.addTextField(configurationHandler: { $0.placeholder = "Title"})
+
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+
+        present(alert, animated: true)
         
     }
     
